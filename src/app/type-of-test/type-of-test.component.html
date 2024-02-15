@@ -1,0 +1,19 @@
+<div class="container">
+    <div *ngFor="let case of testCases" class="caseCard">
+        <br>
+        <mat-accordion>
+            <mat-expansion-panel [expanded]="true">
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        <h3>{{case}}</h3>
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        This is a summary of the content
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <app-test-case-detail></app-test-case-detail>
+            </mat-expansion-panel>
+        </mat-accordion>
+    </div>
+    <br>
+</div>
