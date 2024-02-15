@@ -1,3 +1,54 @@
+.run-all-btn{
+    display: flex;
+    justify-content: end;
+}
 .caseCard{
-    margin: 5vh 0;
+    // margin: 5vh 0;
+}
+.panel-description{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+// h3{
+//     color: #fff;
+// }
+// .panel-header-0{
+//     background-color: #61affe !important;
+// }
+// .panel-header-1{
+//     background-color: #fca130 !important;
+// }
+// .panel-header-2{
+//     background-color: #49cc90 !important;
+// }
+// .panel-header-3{
+//     background-color: #f93e3e !important;
+// }
+.case-box-0{
+    background: rgba(97,175,254,.1);
+    border:1px solid #61affe ;
+}
+
+.case-box-1{
+    background: rgba(252,161,48,.1);
+    border:1px solid #fca130 ;
+}
+
+.case-box-2{
+    background: rgba(73,204,144,.1);
+    border:1px solid #49cc90;
+}
+
+.case-box-3{
+    background: rgba(249,62,62,.1);
+    border:1px solid #f93e3e;
+}
+.log-box{
+    margin: 1vw;
+    border: 1px solid rgb(221, 221, 221);
+    background-color: rgb(51, 51, 51);
+    color: white;
+    padding: 1vw;
+    border-radius: 10px;
 }

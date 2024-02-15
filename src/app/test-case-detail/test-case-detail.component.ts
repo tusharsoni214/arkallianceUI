@@ -8,4 +8,8 @@ import { Component } from '@angular/core';
 export class TestCaseDetailComponent {
     testCases:string[] = ["Test Case 1", "Test Case 2", "Test Case 3", "Test Case 4"];
     panelOpened:boolean = true;
+    onButtonClick(event: MouseEvent) {
+      event.stopPropagation();
+      // Add any additional button click logic here
+    }
 }

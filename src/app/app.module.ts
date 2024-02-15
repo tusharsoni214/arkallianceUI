@@ -9,6 +9,7 @@ import { TypeOfTestComponent } from './type-of-test/type-of-test.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { TestCaseDetailComponent } from './test-case-detail/test-case-detail.component';
 import {MatButtonModule} from '@angular/material/button';
+import { HttpClientModule } from '@angular/common/http';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,8 @@ import {MatButtonModule} from '@angular/material/button';
     AppRoutingModule,
     BrowserAnimationsModule,
     MatExpansionModule,
-    MatButtonModule
+    MatButtonModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
