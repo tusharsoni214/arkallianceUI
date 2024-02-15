@@ -15,7 +15,7 @@
                         <button mat-flat-button color="warn" (click)="onButtonClick($event)">Run</button>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
-                <app-test-case-detail></app-test-case-detail>
+                <app-test-case-detail [caseType]="case"></app-test-case-detail>
                 <div class="log-box">
                     <h5>Logs</h5>
                     <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy 
