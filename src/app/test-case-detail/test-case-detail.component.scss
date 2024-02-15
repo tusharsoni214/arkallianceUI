@@ -10,4 +10,10 @@
     padding: 1vw;
     border-radius: 10px;
 }
+.custom-progress-bar {
+    --mdc-linear-progress-active-indicator-color: rgb(51, 51, 51);;
+}
+.custom-progress-bar {
+    background-color: rgba(51, 51, 51, 0.205);
+}
 

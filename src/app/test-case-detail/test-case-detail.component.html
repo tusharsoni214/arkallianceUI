@@ -1,25 +1,22 @@
 <div class="container">
-    <div *ngFor="let case of testCases" class="caseCard">
+    <div *ngFor="let caseName of testCaseNames;let i = index" class="caseCard">
         <br>
         <mat-accordion>
-            <mat-expansion-panel [expanded]="false">
+            <mat-expansion-panel  (opened)="updatePanelState(i, true)" (closed)="updatePanelState(i, false)" [expanded]="panelExpanded[i]">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        {{case}}
+                        {{caseName}}
                     </mat-panel-title>
                     <mat-panel-description class="panel-description">
                         This is a summary of the content
-                        <button mat-flat-button color="warn" (click)="onButtonClick($event)">Run</button>
+                        <button mat-flat-button color="warn" (click)="runTestCase(i,caseName,$event)">Run</button>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
+                <mat-progress-bar *ngIf="loading[i]" class="custom-progress-bar" mode="indeterminate"></mat-progress-bar>
+                <br>
                 <div class="log-box">
                     <h5>Logs</h5>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy 
-                        text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-                        It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently 
-                        with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                    </p>
+                    <p id="log{{caseType+i}}"></p>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>

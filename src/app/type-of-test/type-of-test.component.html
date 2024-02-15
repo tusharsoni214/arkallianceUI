@@ -4,26 +4,23 @@
     </div>
     <div *ngFor="let case of testCases;let i=index;" class="caseCard">
         <br>
-        <mat-accordion >
-            <mat-expansion-panel [expanded]="true" [ngClass]="getPanelClass('case-box',i)">
+        <mat-accordion  >
+            <mat-expansion-panel   (opened)="updatePanelState(i, true)" (closed)="updatePanelState(i, false)" [expanded]="panelExpanded[i]" [ngClass]="getPanelClass('case-box',i)">
                 <mat-expansion-panel-header  [ngClass]="getPanelClass('panel-header',i)">
                     <mat-panel-title>
                         <h3>{{case}}</h3>
                     </mat-panel-title>
                     <mat-panel-description class="panel-description">
                         This is a summary of the content
-                        <button mat-flat-button color="warn" (click)="onButtonClick($event)">Run</button>
+                        <button mat-flat-button color="warn" (click)="runTestCase(i,case,$event)">Run</button>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
+                <mat-progress-bar *ngIf="loading[i]" [ngClass]="{'custom-progress-bar-orange':case.toUpperCase().includes('DATABASE'),'custom-progress-bar-green':case.toUpperCase().includes('API'),'custom-progress-bar-red':case.toUpperCase().includes('LOAD')}"  mode="indeterminate"></mat-progress-bar>
+                <br>
                 <app-test-case-detail [caseType]="case"></app-test-case-detail>
                 <div class="log-box">
                     <h5>Logs</h5>
-                    <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy 
-                        text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. 
-                        It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently 
-                        with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
-                    </p>
+                    <p id="logBox{{i}}"></p>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>

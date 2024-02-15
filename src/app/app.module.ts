@@ -10,12 +10,15 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import { TestCaseDetailComponent } from './test-case-detail/test-case-detail.component';
 import {MatButtonModule} from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
+import { TypingPipe } from './typing.pipe';
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     TypeOfTestComponent,
-    TestCaseDetailComponent
+    TestCaseDetailComponent,
+    TypingPipe
   ],
   imports: [
     BrowserModule,
@@ -23,7 +26,8 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserAnimationsModule,
     MatExpansionModule,
     MatButtonModule,
-    HttpClientModule
+    HttpClientModule,
+    MatProgressBarModule
   ],
   providers: [],
   bootstrap: [AppComponent]

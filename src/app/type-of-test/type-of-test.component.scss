@@ -52,3 +52,22 @@
     padding: 1vw;
     border-radius: 10px;
 }
+
+.custom-progress-bar-orange {
+    --mdc-linear-progress-active-indicator-color: #ff8989;
+}
+.custom-progress-bar-orange {
+    background-color: #ff61613a
+}
+.custom-progress-bar-green {
+    --mdc-linear-progress-active-indicator-color: #49cc90;
+}
+.custom-progress-bar-green {
+    background-color: #49cc9131
+}
+.custom-progress-bar-red {
+    --mdc-linear-progress-active-indicator-color: #f93e3e;
+}
+.custom-progress-bar-red {
+    background-color: #f93e3e3b
+}

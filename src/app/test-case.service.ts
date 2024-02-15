@@ -8,7 +8,7 @@ export class TestCaseService {
   constructor(private http: HttpClient) { }
 
   getTestNames(){
-    return this.http.get('/all_test_names');
+    return this.http.get('http://127.0.0.1:5000/all_test_names');
   }
 
   // getPerformanceTestNames(){
@@ -16,14 +16,23 @@ export class TestCaseService {
   // }
 
   runAPITests() {
-    return this.http.get('/run_api_tests');
+    return this.http.get('http://127.0.0.1:5000/run_api_tests');
+  }
+  runAPITestsByName(testCaseName:string) {
+    return this.http.get(`http://127.0.0.1:5000/run_api_tests/${testCaseName}`);
   }
 
   runDatabaseTests() {
-    return this.http.get('/run_database_tests');
+    return this.http.get('http://127.0.0.1:5000/run_database_tests');
+  }
+  runDatabaseTestsByName(testCaseName:string) {
+    return this.http.get(`http://127.0.0.1:5000/run_database_tests/${testCaseName}`);
+  }
+  runUITestsByName(testCaseName:string) {
+    return this.http.get(`http://127.0.0.1:5000/run_ui_tests/${testCaseName}`);
   }
   runUITests() {
-    return this.http.get('/run_ui_tests');
+    return this.http.get('http://127.0.0.1:5000/run_ui_tests');
   }
   // runPerformanceTests() {
   //   return this.http.get('/run_performance_tests');
