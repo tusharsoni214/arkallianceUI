@@ -1,23 +1,23 @@
 <div class="container">
     <div class="run-all-btn">
-        <button mat-flat-button color="warn">Run All Tests</button>
+        <button mat-flat-button color="warn" (click)="runAllTestCases()">Run All Tests</button>
     </div>
-    <div *ngFor="let case of testCases;let i=index;" class="caseCard">
+    <div *ngFor="let test of testTypes;let i=index;" class="caseCard">
         <br>
         <mat-accordion  >
             <mat-expansion-panel   (opened)="updatePanelState(i, true)" (closed)="updatePanelState(i, false)" [expanded]="panelExpanded[i]" [ngClass]="getPanelClass('case-box',i)">
                 <mat-expansion-panel-header  [ngClass]="getPanelClass('panel-header',i)">
                     <mat-panel-title>
-                        <h3>{{case}}</h3>
+                        <h3>{{test}} Test Cases</h3>
                     </mat-panel-title>
                     <mat-panel-description class="panel-description">
                         This is a summary of the content
-                        <button mat-flat-button color="warn" (click)="runTestCase(i,case,$event)">Run</button>
+                        <button mat-flat-button color="warn" (click)="runTestCase(i,test,$event)">Run</button>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
-                <mat-progress-bar *ngIf="loading[i]" [ngClass]="{'custom-progress-bar-orange':case.toUpperCase().includes('DATABASE'),'custom-progress-bar-green':case.toUpperCase().includes('API'),'custom-progress-bar-red':case.toUpperCase().includes('LOAD')}"  mode="indeterminate"></mat-progress-bar>
+                <mat-progress-bar *ngIf="loading[i]" [ngClass]="{'custom-progress-bar-orange':test.toUpperCase().includes('DATABASE'),'custom-progress-bar-green':test.toUpperCase().includes('API'),'custom-progress-bar-red':test.toUpperCase().includes('LOAD')}"  mode="indeterminate"></mat-progress-bar>
                 <br>
-                <app-test-case-detail [caseType]="case"></app-test-case-detail>
+                <app-test-case-file [testType]="test" [logIndex] = "i"></app-test-case-file >
                 <div class="log-box">
                     <h5>Logs</h5>
                     <p id="logBox{{i}}"></p>

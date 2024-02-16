@@ -1,23 +1,20 @@
 <div class="container">
-    <div *ngFor="let caseName of testCaseNames;let i = index" class="caseCard">
+    <div *ngFor="let fileName of getObjectKeys(testFileNames);let i = index" class="caseCard">
         <br>
         <mat-accordion>
             <mat-expansion-panel  (opened)="updatePanelState(i, true)" (closed)="updatePanelState(i, false)" [expanded]="panelExpanded[i]">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
-                        {{caseName}}
+                        {{fileName}}
                     </mat-panel-title>
                     <mat-panel-description class="panel-description">
                         This is a summary of the content
-                        <button mat-flat-button color="warn" (click)="runTestCase(i,caseName,$event)">Run</button>
+                        <button mat-flat-button color="warn" (click)="runTestCase(i,fileName,$event)">Run</button>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
                 <mat-progress-bar *ngIf="loading[i]" class="custom-progress-bar" mode="indeterminate"></mat-progress-bar>
                 <br>
-                <div class="log-box">
-                    <h5>Logs</h5>
-                    <p id="log{{caseType+i}}"></p>
-                </div>
+                <app-test-case-functions [testFunctions]="testFileNames[fileName]" [fileName]="fileName" [testType]="testType" [logIndex]="logIndex"></app-test-case-functions>
             </mat-expansion-panel>
         </mat-accordion>
     </div>

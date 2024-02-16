@@ -7,18 +7,18 @@ import { NavbarComponent } from './navbar/navbar.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TypeOfTestComponent } from './type-of-test/type-of-test.component';
 import {MatExpansionModule} from '@angular/material/expansion';
-import { TestCaseDetailComponent } from './test-case-detail/test-case-detail.component';
+import { TestCaseDetailComponent } from './test-case-file/test-case-file.component';
 import {MatButtonModule} from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
-import { TypingPipe } from './typing.pipe';
+import { TestCaseFunctionsComponent } from './test-case-functions/test-case-functions.component';
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     TypeOfTestComponent,
     TestCaseDetailComponent,
-    TypingPipe
+    TestCaseFunctionsComponent
   ],
   imports: [
     BrowserModule,
