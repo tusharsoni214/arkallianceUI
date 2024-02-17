@@ -13,13 +13,17 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { TestCaseFunctionsComponent } from './test-case-functions/test-case-functions.component';
 import { HotToastModule } from '@ngneat/hot-toast';
+import { ChatComponent } from './chat/chat.component';
+import {MatIconModule} from '@angular/material/icon';
+import { FormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     AppComponent,
     NavbarComponent,
     TypeOfTestComponent,
     TestCaseDetailComponent,
-    TestCaseFunctionsComponent
+    TestCaseFunctionsComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
@@ -29,7 +33,9 @@ import { HotToastModule } from '@ngneat/hot-toast';
     MatButtonModule,
     HttpClientModule,
     MatProgressBarModule,
-    HotToastModule
+    HotToastModule,
+    MatIconModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

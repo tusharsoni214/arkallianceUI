@@ -1,0 +1,20 @@
+<div class="container">
+    <button mat-icon-button (click)="redirectToHome()">
+        <mat-icon>arrow_back</mat-icon>
+    </button>
+        <div class="chat-response">
+            <div class="message" *ngFor="let message of chatMessages.reverse()">
+                <div class="owner" [ngClass]="{'myMessage':message.owner == 'YOU'}" >{{message.owner}}</div>
+                <div class="content"  [ngClass]="{'myMessage':message.owner == 'YOU'}">{{message.message}}</div>
+            </div>
+           
+        </div>
+        <div class="textarea-container">
+            <textarea id="message" (keydown.enter)="sendMessageToGpt()" class="chat-input" placeholder="Message ArkGPT" rows="1" [(ngModel)]="gptprompt" (input)="autoResize($event.target)"></textarea>
+            <!-- <span class="textarea" role="textbox" contenteditable ></span> -->
+            <button mat-icon-button class="send-message-button" (click)="sendMessageToGpt()">
+                <mat-icon>arrow_upward</mat-icon>
+            </button>
+        </div>
+        <br>
+</div>
