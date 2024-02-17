@@ -1,6 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { TestCaseService } from '../services/test-case/test-case.service';
 import { LogService } from '../services/log/log.service';
+import { HotToastService } from '@ngneat/hot-toast';
 
 @Component({
   selector: 'app-type-of-test',
@@ -8,7 +9,8 @@ import { LogService } from '../services/log/log.service';
   styleUrls: ['./type-of-test.component.scss']
 })
 export class TypeOfTestComponent implements OnInit{
-  constructor(private testService: TestCaseService,private logService:LogService) { }
+  allLoading: boolean = false;
+  constructor(private testService: TestCaseService,private logService:LogService,private toast: HotToastService) { }
   apiCases: any;
   ngOnInit(): void {
     
@@ -19,7 +21,6 @@ export class TypeOfTestComponent implements OnInit{
     getPanelClass(className:string,i:number){
       return `${className}-${i}`;
     }
-
     updatePanelState(index: number, expanded: boolean) {
       this.panelExpanded[index] = expanded;
     }
@@ -34,12 +35,20 @@ export class TypeOfTestComponent implements OnInit{
       this.testService.runTest(testType).subscribe((data:any)=>{
         this.loading[i]=false;
         this.logs[i] = data.logs
-       this.logService.showLogs(i,this.logs[i])
+        this.toast.success(data.message);
+       this.logService.showLogs(testType,this.logs[i])
       });
     }
+    
     runAllTestCases(){
+      this.allLoading = true;
       this.testService.runAllTests().subscribe((data:any)=>{
-        console.log(data)
+        this.allLoading = false;
+        data.logs = JSON.parse(data.logs);
+        this.toast.success(data.message);
+        this.logService.showLogs("UI", data.logs.UI)
+        this.logService.showLogs("API", data.logs.API)
+        this.logService.showLogs("DATABASE", data.logs.DATABASE)
       });
     }
 

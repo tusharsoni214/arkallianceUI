@@ -7,8 +7,8 @@ export class LogService {
 
   constructor() { }
   
-  showLogs(index: number, logs: string) {
-    const logElement = document.getElementById('logBox' + index); 
+  showLogs(testType: string, logs: string) {
+    const logElement = document.getElementById('logBox' + testType); 
     if (logElement) {
       logElement.innerText = ''; // Clear existing content
       this.typeLogs(logs, 0, logElement);

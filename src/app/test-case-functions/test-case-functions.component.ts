@@ -39,7 +39,7 @@ export class TestCaseFunctionsComponent implements OnInit {
     this.testService.runTestByTestName(this.testType,fileName, testName).subscribe((data:any)=>{
       this.loading[i]=false;
       this.logs[i] = data.logs
-      this.logService.showLogs(this.logIndex,this.logs[i])
+      this.logService.showLogs(this.testType,this.logs[i])
     });
   
   }

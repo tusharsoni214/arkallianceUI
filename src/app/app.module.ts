@@ -12,6 +12,7 @@ import {MatButtonModule} from '@angular/material/button';
 import { HttpClientModule } from '@angular/common/http';
 import {MatProgressBarModule} from '@angular/material/progress-bar';
 import { TestCaseFunctionsComponent } from './test-case-functions/test-case-functions.component';
+import { HotToastModule } from '@ngneat/hot-toast';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,7 +28,8 @@ import { TestCaseFunctionsComponent } from './test-case-functions/test-case-func
     MatExpansionModule,
     MatButtonModule,
     HttpClientModule,
-    MatProgressBarModule
+    MatProgressBarModule,
+    HotToastModule
   ],
   providers: [],
   bootstrap: [AppComponent]

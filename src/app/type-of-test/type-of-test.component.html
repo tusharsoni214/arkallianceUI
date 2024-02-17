@@ -2,6 +2,8 @@
     <div class="run-all-btn">
         <button mat-flat-button color="warn" (click)="runAllTestCases()">Run All Tests</button>
     </div>
+    <br>
+    <mat-progress-bar *ngIf="allLoading" class="custom-progress-bar" mode="indeterminate"></mat-progress-bar>
     <div *ngFor="let test of testTypes;let i=index;" class="caseCard">
         <br>
         <mat-accordion  >
@@ -20,7 +22,7 @@
                 <app-test-case-file [testType]="test" [logIndex] = "i"></app-test-case-file >
                 <div class="log-box">
                     <h5>Logs</h5>
-                    <p id="logBox{{i}}"></p>
+                    <p id="logBox{{test.toUpperCase()}}"></p>
                 </div>
             </mat-expansion-panel>
         </mat-accordion>

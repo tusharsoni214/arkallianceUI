@@ -61,7 +61,7 @@ export class TestCaseDetailComponent implements OnInit{
     this.testService.runTestByFile(this.testType,fileName).subscribe((data:any) =>{
       this.loading[i]=false;
       this.logs[i] = data.logs
-      this.logService.showLogs(this.logIndex,this.logs[i])
+      this.logService.showLogs(this.testType,this.logs[i])
     });
   }
 }
