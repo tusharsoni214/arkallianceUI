@@ -17,10 +17,14 @@ interface Message{
 export class ChatComponent implements OnInit,OnDestroy  {
   constructor(private router:Router,private gpt:GptService){}
   ngOnDestroy(): void {
-    this.socket.disconnet();
+    this.disconnectSocket()
   }
   socket:any
   ngOnInit(): void {
+    this.connectSocket(); 
+  }
+
+  connectSocket(){
     this.socket = io("http://127.0.0.1:5000");
     this.socket.on("message",(data:any)=>{
       this.messages.push(data.toString());
@@ -34,6 +38,9 @@ export class ChatComponent implements OnInit,OnDestroy  {
         this.chatMessages.push(gptResponse);
       }
     })
+  }
+  disconnectSocket(){
+    this.socket.disconnect();
   }
   chatMessages:any[] = [];
   gptprompt: string = '';
