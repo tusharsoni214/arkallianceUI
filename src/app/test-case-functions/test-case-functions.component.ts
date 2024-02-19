@@ -1,6 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { TestCaseService } from '../services/test-case/test-case.service';
 import { LogService } from '../services/log/log.service';
+import { io } from 'socket.io-client';
+import { GptService } from '../services/gpt/gpt.service';
+
+interface Message{
+  owner: string;
+  message: string;
+}
+
 
 @Component({
   selector: 'app-test-case-functions',
@@ -8,9 +16,15 @@ import { LogService } from '../services/log/log.service';
   styleUrls: ['./test-case-functions.component.scss'],
 })
 export class TestCaseFunctionsComponent implements OnInit {
-  constructor(private testService: TestCaseService,private logService:LogService) {}
+  messages: any;
+  constructor(private testService: TestCaseService,private logService:LogService,private gpt:GptService) {}
 
+  ngOnDestroy(): void {
+    this.disconnectSocket()
+  }
+  socket:any
   ngOnInit(): void {
+    this.connectSocket(); 
   }
   @Input() testFunctions: any;
   @Input() fileName: any;
@@ -30,8 +44,17 @@ export class TestCaseFunctionsComponent implements OnInit {
   loading: boolean[] = new Array(this.testFileNames.length).fill(false);
   panelExpanded: boolean[] = new Array(this.testFileNames.length).fill(false);
   logs: string[] = new Array(this.testFileNames.length).fill('');
-
-
+  disconnectSocket(){
+    this.socket.disconnect();
+  }
+  chatMessages:any[] = [];
+  suggestedCode:string ='';
+  connectSocket(){
+    this.socket = io("http://127.0.0.1:5000");
+    this.socket.on("message",(data:any)=>{
+      this.suggestedCode += data.toString(); 
+    })
+  }
   runTestCaseByName(i: number, fileName: string,testName:string, event: MouseEvent) {
     event.stopPropagation();
     this.panelExpanded[i] = true;
@@ -41,6 +64,25 @@ export class TestCaseFunctionsComponent implements OnInit {
       this.logs[i] = data.logs
       this.logService.showLogs(this.testType,this.logs[i])
     });
-  
+  }
+  suggestCode(i: number, fileName: string,testName:string, event: MouseEvent) {
+    event.stopPropagation();
+    this.panelExpanded[i] = true;
+    this.loading[i] = true;
+    this.testService.getFunctionSourceCode(this.testType,fileName, testName).subscribe((data:any)=>{
+      this.loading[i]=false;
+      let gptprompt = `This is my test case ${data} can you please look for any error/ optimization and provide me any sugesstion`
+      this.gpt.getGptResponse(gptprompt.toString()).subscribe(response=>{
+        console.log(response);
+    })
+    },()=>{},
+    ()=>{
+      
+
+
+       
+        
+      }
+    );
   }
 }

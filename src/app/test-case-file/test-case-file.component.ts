@@ -59,6 +59,7 @@ export class TestCaseDetailComponent implements OnInit{
     this.panelExpanded[i]  = true;
     this.loading[i]=true
     this.testService.runTestByFile(this.testType,fileName).subscribe((data:any) =>{
+      console.log(data);
       this.loading[i]=false;
       this.logs[i] = data.logs
       this.logService.showLogs(this.testType,this.logs[i])

@@ -27,7 +27,6 @@ export class ChatComponent implements OnInit,OnDestroy  {
   connectSocket(){
     this.socket = io("http://127.0.0.1:5000");
     this.socket.on("message",(data:any)=>{
-      this.messages.push(data.toString());
       let gptResponse:Message ={
         owner: "ArkGPT",
         message: data.toString()
@@ -53,7 +52,6 @@ export class ChatComponent implements OnInit,OnDestroy  {
       textarea.style.height = textarea.scrollHeight + 'px';
     }
   }
-  messages: string[] = [];
   sendMessageToGpt(){
     let message:Message = {
       owner: "YOU",

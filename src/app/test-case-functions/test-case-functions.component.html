@@ -2,10 +2,14 @@
     <div *ngFor="let function of testFunctions;let i = index" class="caseCard">
         <div class="card">
             <mat-progress-bar *ngIf="loading[i]" class="custom-progress-bar" mode="indeterminate"></mat-progress-bar>
-            <div class="function ">
+            <div class="function">
                 <a (click)="runTestCaseByName(i,fileName,function,$event)" class="function-link"><strong>{{function}}</strong></a>
-                <button mat-flat-button color="warn" (click)="runTestCaseByName(i,fileName,function,$event)">Run</button>
+                <div class="action-btns">
+                    <button mat-flat-button color="primary" (click)="suggestCode(i,fileName,function,$event)">Suggest Code</button>
+                    <button mat-flat-button color="warn" (click)="runTestCaseByName(i,fileName,function,$event)">Run</button>
+                </div>
             </div>
+            <p *ngIf="suggestedCode">{{suggestedCode}}</p>
         </div>
         <br>
     </div>
