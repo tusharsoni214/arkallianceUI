@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GptService } from '../services/gpt/gpt.service';
-
+import  {io} from 'socket.io-client';
 
 interface Message{
   owner: string;
@@ -14,8 +14,27 @@ interface Message{
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss']
 })
-export class ChatComponent {
+export class ChatComponent implements OnInit,OnDestroy  {
   constructor(private router:Router,private gpt:GptService){}
+  ngOnDestroy(): void {
+    this.socket.disconnet();
+  }
+  socket:any
+  ngOnInit(): void {
+    this.socket = io("http://127.0.0.1:5000");
+    this.socket.on("message",(data:any)=>{
+      this.messages.push(data.toString());
+      let gptResponse:Message ={
+        owner: "ArkGPT",
+        message: data.toString()
+      }
+      if(this.chatMessages[this.chatMessages.length-1].owner === "ArkGPT"){
+        this.chatMessages[this.chatMessages.length-1].message += data.toString(); 
+      }else{
+        this.chatMessages.push(gptResponse);
+      }
+    })
+  }
   chatMessages:any[] = [];
   gptprompt: string = '';
   redirectToHome(){
@@ -27,6 +46,7 @@ export class ChatComponent {
       textarea.style.height = textarea.scrollHeight + 'px';
     }
   }
+  messages: string[] = [];
   sendMessageToGpt(){
     let message:Message = {
       owner: "YOU",
@@ -34,12 +54,9 @@ export class ChatComponent {
     };
     this.chatMessages.push(message)
     this.gpt.getGptResponse(this.gptprompt.toString()).subscribe(response=>{
-      let gptResponse:Message ={
-        owner: "ArkGPT",
-        message: response.toString()
-      }
-      this.chatMessages.push(gptResponse);
-    })
+  })
+   
+    
     this.gptprompt = ''
   }
 }
