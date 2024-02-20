@@ -16,6 +16,7 @@ import { HotToastModule } from '@ngneat/hot-toast';
 import { ChatComponent } from './chat/chat.component';
 import {MatIconModule} from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
+import {MatMenuModule} from '@angular/material/menu';
 @NgModule({
   declarations: [
     AppComponent,
@@ -35,7 +36,8 @@ import { FormsModule } from '@angular/forms';
     MatProgressBarModule,
     HotToastModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    MatMenuModule
   ],
   providers: [],
   bootstrap: [AppComponent]

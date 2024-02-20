@@ -1,6 +1,18 @@
 <div class="container">
     <div class="run-all-btn">
         <button mat-flat-button color="warn" (click)="runAllTestCases()">Run All Tests</button>
+        <div>
+            <button mat-flat-button color="primary" class="border-radius-left-0" (click)="generateReport()">Generate Report</button>
+            <button mat-flat-button [matMenuTriggerFor]="menu" color="primary" class="border-radius-right-0"  >
+                <mat-icon>more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item  (click)="cleanReport()">
+                <span>Clean reports</span>
+                </button>
+            </mat-menu>
+        </div>
+
     </div>
     <br>
     <mat-progress-bar *ngIf="allLoading" class="custom-progress-bar" mode="indeterminate"></mat-progress-bar>

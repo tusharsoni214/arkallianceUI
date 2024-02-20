@@ -10,6 +10,12 @@ export class TestCaseService {
   getTestNames(){
     return this.http.get('http://127.0.0.1:5000/all_test_names');
   }
+  generateReport(){
+    return this.http.get('http://127.0.0.1:5000/generate_report');
+  }
+  cleanReport(){
+    return this.http.get('http://127.0.0.1:5000/clean_report');
+  }
   getFunctionSourceCode(fileName: string,testName: string){
     return this.http.get(`http://127.0.0.1:5000/suggest_code/${fileName}/${testName}`);
   }
