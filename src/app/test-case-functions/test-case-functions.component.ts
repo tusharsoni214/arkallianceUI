@@ -69,7 +69,7 @@ export class TestCaseFunctionsComponent implements OnInit {
     event.stopPropagation();
     this.panelExpanded[i] = true;
     this.loading[i] = true;
-    this.testService.getFunctionSourceCode(this.testType,fileName, testName).subscribe((data:any)=>{
+    this.testService.getFunctionSourceCode(fileName, testName).subscribe((data:any)=>{
       this.loading[i]=false;
       let gptprompt = `This is my test case ${data} can you please look for any error/ optimization and provide me any sugesstion`
       this.gpt.getGptResponse(gptprompt.toString()).subscribe(response=>{
