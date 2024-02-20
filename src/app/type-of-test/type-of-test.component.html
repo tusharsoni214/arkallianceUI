@@ -18,7 +18,7 @@
     <mat-progress-bar *ngIf="allLoading" class="custom-progress-bar" mode="indeterminate"></mat-progress-bar>
     <div *ngFor="let test of testTypes;let i=index;" class="caseCard">
         <br>
-        <mat-accordion  >
+        <mat-accordion>
             <mat-expansion-panel   (opened)="updatePanelState(i, true)" (closed)="updatePanelState(i, false)" [expanded]="panelExpanded[i]" [ngClass]="getPanelClass('case-box',i)">
                 <mat-expansion-panel-header  [ngClass]="getPanelClass('panel-header',i)">
                     <mat-panel-title>
@@ -31,8 +31,8 @@
                 </mat-expansion-panel-header>
                 <mat-progress-bar *ngIf="loading[i]" [ngClass]="{'custom-progress-bar-orange':test.toUpperCase().includes('DATABASE'),'custom-progress-bar-green':test.toUpperCase().includes('API'),'custom-progress-bar-red':test.toUpperCase().includes('LOAD')}"  mode="indeterminate"></mat-progress-bar>
                 <br>
-                <app-test-case-file [testType]="test" [logIndex] = "i"></app-test-case-file >
-                <div class="log-box">
+                <app-test-case-file [testType]="test" [logIndex] = "i" *ngIf="test.toUpperCase() != 'LOAD'"></app-test-case-file >
+                <div class="log-box" *ngIf="test.toUpperCase() != 'LOAD'">
                     <h5>Logs</h5>
                     <p id="logBox{{test.toUpperCase()}}"></p>
                 </div>
