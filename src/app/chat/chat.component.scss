@@ -45,8 +45,10 @@
         color: #42aaff
     }
     .content{
-        font-size: large;
         white-space: pre-wrap;
+        pre{
+            width: 60% !important;
+        }
     }
 }
 .myMessage{

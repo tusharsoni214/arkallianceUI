@@ -32,3 +32,38 @@ html, body {
 body { 
   margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+// pre code {
+//   font-size: inherit;
+//   color: inherit;
+//   padding: 0 1vh;
+//   word-break: normal;
+// }
+// .codeblock-heading {
+//   background-color: #4c4c4c;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   padding: 0.2rem 1.5rem;
+// }
+// pre {
+//   background-color: black;
+//   display: block;
+//   margin-top: 0;
+//   margin-bottom: 1rem;
+//   overflow: auto;
+//   font-size: 0.875em;
+//   width: 50%;
+//   color: white;
+//   border-radius: 10px;
+// }
+// .code {
+//   padding: 1rem;
+// }
+.copy-button{
+    padding: 4px;
+    border-radius: 6px;
+    background: #6b6b6b;
+    color: white;
+}
+
+

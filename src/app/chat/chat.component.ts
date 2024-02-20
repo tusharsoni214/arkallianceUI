@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GptService } from '../services/gpt/gpt.service';
 import  {io} from 'socket.io-client';
+import hljs from 'highlight.js';
 
 interface Message{
   owner: string;
@@ -36,6 +37,7 @@ export class ChatComponent implements OnInit,OnDestroy  {
       }else{
         this.chatMessages.push(gptResponse);
       }
+      hljs.highlightAll();
     })
   }
   disconnectSocket(){

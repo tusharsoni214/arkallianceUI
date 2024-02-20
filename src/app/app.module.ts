@@ -17,6 +17,7 @@ import { ChatComponent } from './chat/chat.component';
 import {MatIconModule} from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import {MatMenuModule} from '@angular/material/menu';
+import { CodeBlockPipe } from './code-block.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +25,8 @@ import {MatMenuModule} from '@angular/material/menu';
     TypeOfTestComponent,
     TestCaseDetailComponent,
     TestCaseFunctionsComponent,
-    ChatComponent
+    ChatComponent,
+    CodeBlockPipe
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,9 @@ import {MatMenuModule} from '@angular/material/menu';
     FormsModule,
     MatMenuModule
   ],
-  providers: [],
+  providers: [
+  
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

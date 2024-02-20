@@ -9,7 +9,8 @@
                     <button mat-flat-button color="warn" (click)="runTestCaseByName(i,fileName,function,$event)">Run</button>
                 </div>
             </div>
-            <p *ngIf="suggestedCode">{{suggestedCode}}</p>
+            <p id="codeBlock" *ngIf="suggestedCode" [innerHTML]="suggestedCode | codeBlock"></p>
+
         </div>
         <br>
     </div>

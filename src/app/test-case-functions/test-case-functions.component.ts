@@ -1,9 +1,9 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, QueryList, ViewChild } from '@angular/core';
 import { TestCaseService } from '../services/test-case/test-case.service';
 import { LogService } from '../services/log/log.service';
 import { io } from 'socket.io-client';
 import { GptService } from '../services/gpt/gpt.service';
-
+import hljs from 'highlight.js';
 interface Message{
   owner: string;
   message: string;
@@ -24,7 +24,8 @@ export class TestCaseFunctionsComponent implements OnInit {
   }
   socket:any
   ngOnInit(): void {
-    this.connectSocket(); 
+    this.connectSocket();
+
   }
   @Input() testFunctions: any;
   @Input() fileName: any;
@@ -53,8 +54,10 @@ export class TestCaseFunctionsComponent implements OnInit {
     this.socket = io("http://127.0.0.1:5000");
     this.socket.on("message",(data:any)=>{
       this.suggestedCode += data.toString(); 
+      hljs.highlightAll();
     })
   }
+ 
   runTestCaseByName(i: number, fileName: string,testName:string, event: MouseEvent) {
     event.stopPropagation();
     this.panelExpanded[i] = true;
@@ -65,15 +68,18 @@ export class TestCaseFunctionsComponent implements OnInit {
       this.logService.showLogs(this.testType,this.logs[i])
     });
   }
+  copyCode(){
+    console.log("copyCode");
+  }
   suggestCode(i: number, fileName: string,testName:string, event: MouseEvent) {
     event.stopPropagation();
     this.panelExpanded[i] = true;
     this.loading[i] = true;
     this.testService.getFunctionSourceCode(fileName, testName).subscribe((data:any)=>{
-      this.loading[i]=false;
-      let gptprompt = `This is my test case ${data} can you please look for any error/ optimization and provide me any sugesstion`
+      let gptprompt = `This is my test case ${data} can you please look for any error/optimization and provide me new code`
       this.gpt.getGptResponse(gptprompt.toString()).subscribe(response=>{
-        console.log(response);
+        this.loading[i]=false;
+
     })
     },()=>{},
     ()=>{

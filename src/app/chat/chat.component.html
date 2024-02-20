@@ -5,7 +5,7 @@
         <div class="chat-response">
             <div class="message" *ngFor="let message of chatMessages.reverse()">
                 <div class="owner" [ngClass]="{'myMessage':message.owner == 'YOU'}" >{{message.owner}}</div>
-                <div class="content"  [ngClass]="{'myMessage':message.owner == 'YOU'}">{{message.message}}</div>
+                <div class="content"  [ngClass]="{'myMessage':message.owner == 'YOU'}" [innerHTML]="message.message | codeBlock"></div>
             </div>
            
         </div>
