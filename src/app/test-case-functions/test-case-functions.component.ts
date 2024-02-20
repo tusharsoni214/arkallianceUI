@@ -24,7 +24,7 @@ export class TestCaseFunctionsComponent implements OnInit {
   }
   socket:any
   ngOnInit(): void {
-    this.connectSocket(); 
+    this.connectSocket();
   }
   @Input() testFunctions: any;
   @Input() fileName: any;
@@ -33,7 +33,7 @@ export class TestCaseFunctionsComponent implements OnInit {
   updatePanelState(index: number, expanded: boolean) {
     this.panelExpanded[index] = expanded;
   }
- 
+
   testFileNames: any = [
     'Test Case 1',
     'Test Case 2',
@@ -52,7 +52,7 @@ export class TestCaseFunctionsComponent implements OnInit {
   connectSocket(){
     this.socket = io("http://127.0.0.1:5000");
     this.socket.on("message",(data:any)=>{
-      this.suggestedCode += data.toString(); 
+      this.suggestedCode += data.toString();
     })
   }
   runTestCaseByName(i: number, fileName: string,testName:string, event: MouseEvent) {
@@ -77,11 +77,11 @@ export class TestCaseFunctionsComponent implements OnInit {
     })
     },()=>{},
     ()=>{
-      
 
 
-       
-        
+
+
+
       }
     );
   }

@@ -1,7 +1,7 @@
 .chat-response{
     display: flex;
     flex-direction: column-reverse;
-    background-color: #141414;
+    background-color: #14141408;
     min-height: 65vh;
     max-height: 65vh;
     overflow: auto;
@@ -41,17 +41,44 @@
 }
 .message{
     position: relative;
+    margin-bottom: 5px;
     .owner{
-        color: #42aaff
+        color: black;
+        font-weight: 500;
     }
     .content{
         font-size: large;
         white-space: pre-wrap;
+        color: black;
     }
+}
+.you-message{
+  background-color: aliceblue;
+  border: 1px solid #42aaff;
+  border-radius: 25px;
+  padding: 10px;
 }
 .myMessage{
     display: flex;
     justify-content: end;
+
+}
+.arkgpt-message {
+  background-color: pink;
+  border: 1px solid #db4962;
+  border-radius: 25px;
+  padding: 10px;
 }
 
 
+::ng-deep .mat-icon {
+  -webkit-user-select: none;
+  user-select: none;
+  background-repeat: no-repeat;
+  display: inline-block;
+  fill: currentColor;
+  height: 30px!important;
+  width: 25px!important;
+  overflow: hidden!important;
+  margin-top: -3px!important;
+}

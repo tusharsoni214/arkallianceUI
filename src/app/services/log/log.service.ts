@@ -6,9 +6,9 @@ import { Injectable } from '@angular/core';
 export class LogService {
 
   constructor() { }
-  
+
   showLogs(testType: string, logs: string) {
-    const logElement = document.getElementById('logBox' + testType.toUpperCase()); 
+    const logElement = document.getElementById('logBox' + testType.toUpperCase());
     if (logElement) {
       logElement.innerText = ''; // Clear existing content
       this.typeLogs(logs, 0, logElement);
@@ -17,13 +17,13 @@ export class LogService {
   typeLogs(logs: string, index: number, logElement: HTMLElement) {
     if (index < logs.length) {
       if (logs[index] === '\n') {
-        logElement.appendChild(document.createElement('br')); 
+        logElement.appendChild(document.createElement('br'));
       } else {
-        logElement.innerText += logs[index]; 
+        logElement.innerText += logs[index];
       }
       index++;
-      setTimeout(() => this.typeLogs(logs, index, logElement), 5); 
+      setTimeout(() => this.typeLogs(logs, index, logElement), 5);
     }
   }
- 
+
 }

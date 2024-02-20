@@ -14,10 +14,11 @@ export class TypeOfTestComponent implements OnInit{
   apiCases: any;
   openai:any
   ngOnInit(): void {
-    
+
   }
+
     testTypes:string[] = ["UI", "Database", "Api", "Load"];
-   
+
     panelOpened:boolean = true;
     getPanelClass(className:string,i:number){
       return `${className}-${i}`;
@@ -50,7 +51,7 @@ export class TypeOfTestComponent implements OnInit{
   // } catch (error) {
   //     console.error("Error occurred:", error);
   // }
-   
+
   //   }
     runAllTestCases(){
       this.allLoading = true;
