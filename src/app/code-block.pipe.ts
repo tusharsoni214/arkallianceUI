@@ -7,10 +7,11 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 export class CodeBlockPipe implements PipeTransform {
   constructor(private sanitizer: DomSanitizer){}
   transform(value: string): string | SafeHtml{
-    //learn this properly when you have time
+   
     const codeBlockRegex = /```(\w+)\s*([\s\S]*?)```/gs;
-    let html = "<div class='codeblock-heading'><span>$1</span><button class='copy-button' (click)='copyCode()'>Copy code</button></div>"
-    return this.sanitizer.bypassSecurityTrustHtml(value.replace(codeBlockRegex, `<pre id='codeBlock' class='codeBlock language-python'><div class='code'><code>$2</code></div></pre>`));
+    console.log(codeBlockRegex.exec(value));
+    let html = "     <div class='codeBlock'><div class='codeblock-heading'><span>$1</span><button id='copy-button' class='copy-button' clipboard-data='$2'>Copy code</button></div>"
+    return this.sanitizer.bypassSecurityTrustHtml(value.replace(codeBlockRegex, `${html}<pre id='codeBlock' class=' language-python'><div class='code'><code>$2</code></div></pre></div>`));
   }
 
 }

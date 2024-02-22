@@ -34,10 +34,11 @@ export class ChatComponent implements OnInit,OnDestroy  {
       }
       if(this.chatMessages[this.chatMessages.length-1].owner === "ArkGPT"){
         this.chatMessages[this.chatMessages.length-1].message += data.toString(); 
+        hljs.highlightAll();
       }else{
         this.chatMessages.push(gptResponse);
+        hljs.highlightAll();
       }
-      hljs.highlightAll();
     })
   }
   disconnectSocket(){

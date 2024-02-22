@@ -22,6 +22,7 @@ export class TestCaseDetailComponent implements OnInit{
     this.testService.getTestNames().subscribe((names:any) => {
       switch(this.testType.toUpperCase()){
         case'UI':{
+          console.log(names.ui) 
           names.ui = JSON.parse(names.ui);
           this.testFileNames = names.ui
           break;
@@ -49,7 +50,7 @@ export class TestCaseDetailComponent implements OnInit{
     this.panelExpanded[index] = expanded;
   }
 
-  testFileNames:any= ['Test Case 1','Test Case 2','Test Case 3','Test Case 4'];
+  testFileNames:any= JSON.parse('{"test_login.py": ["test_google_title", "test_search_selenium"]}');
   loading: boolean[] = new Array(this.testFileNames.length).fill(false);
   panelExpanded:boolean[]= new Array(this.testFileNames.length).fill(false);
   logs:string[]= new Array(this.testFileNames.length).fill('');

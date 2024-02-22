@@ -14,7 +14,7 @@ export class TypeOfTestComponent implements OnInit{
   apiCases: any;
   openai:any
   ngOnInit(): void {
-    this.cleanReport()
+    this.testService.cleanReport().subscribe();
   }
     testTypes:string[] = ["UI", "Database", "Api", "Load"];
    

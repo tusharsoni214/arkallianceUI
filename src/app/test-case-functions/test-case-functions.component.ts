@@ -4,6 +4,7 @@ import { LogService } from '../services/log/log.service';
 import { io } from 'socket.io-client';
 import { GptService } from '../services/gpt/gpt.service';
 import hljs from 'highlight.js';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 interface Message{
   owner: string;
   message: string;
@@ -17,7 +18,7 @@ interface Message{
 })
 export class TestCaseFunctionsComponent implements OnInit {
   messages: any;
-  constructor(private testService: TestCaseService,private logService:LogService,private gpt:GptService) {}
+  constructor(private testService: TestCaseService,private logService:LogService,private gpt:GptService,private sanitizer: DomSanitizer) {}
 
   ngOnDestroy(): void {
     this.disconnectSocket()
@@ -25,8 +26,8 @@ export class TestCaseFunctionsComponent implements OnInit {
   socket:any
   ngOnInit(): void {
     this.connectSocket();
-
-  }
+    console.log("Filename",this.testFunctions)
+}
   @Input() testFunctions: any;
   @Input() fileName: any;
   @Input() testType: any;
@@ -49,14 +50,9 @@ export class TestCaseFunctionsComponent implements OnInit {
     this.socket.disconnect();
   }
   chatMessages:any[] = [];
-  suggestedCode:string ='';
-  connectSocket(){
-    this.socket = io("http://127.0.0.1:5000");
-    this.socket.on("message",(data:any)=>{
-      this.suggestedCode += data.toString(); 
-      hljs.highlightAll();
-    })
-  }
+  suggestedCode:Map<string,SafeHtml> = new Map<string,SafeHtml>()
+  suggestFunction:string=''
+
  
   runTestCaseByName(i: number, fileName: string,testName:string, event: MouseEvent) {
     event.stopPropagation();
@@ -71,24 +67,50 @@ export class TestCaseFunctionsComponent implements OnInit {
   copyCode(){
     console.log("copyCode");
   }
-  suggestCode(i: number, fileName: string,testName:string, event: MouseEvent) {
+  connectSocket(){
+    if(!this.socket){
+      this.socket = io("http://127.0.0.1:5000");
+      this.socket.on("message",(data:any)=>{
+        debugger
+        let highlighted = false;
+        const codeBlockRegex = /```(\w+)\s*([\s\S]*?)```/gs;
+        let html = "     <div class='codeBlock'><div class='codeblock-heading'><span>$1</span><button id='copy-button' class='copy-button' clipboard-data='$2'>Copy code</button></div>"
+    
+        let sanitizedCode:string = (this.suggestedCode.get(this.suggestFunction) + data.toString()).replace(codeBlockRegex, `${html}<pre id='codeBlock' class=' language-python'><div class='code'><code>$2</code></div></pre></div>`);
+
+        this.suggestedCode.set(this.suggestFunction,sanitizedCode)
+        //  += data.toString(); 
+        if(sanitizedCode.includes("</pre>") && !highlighted){
+          highlighted = true;
+          hljs.highlightAll();
+        }
+        //  document.getElementById('copy-button')?.addEventListener('click',function(){
+        //     var clipboard = this.getAttribute('clipboard-data')??'';
+        //     const textarea = document.createElement('textarea');
+        //       textarea.value = clipboard;
+        //       document.body.appendChild(textarea);
+        //       textarea.select();
+        //       document.execCommand('copy');
+        //       document.body.removeChild(textarea);
+        //       this.innerText = 'Copied!';
+        //     console.log(clipboard);
+    // })
+       
+      })
+    }
+  }
+  suggestCode(i: number, fileName: string,functionName:string, event: MouseEvent) {
     event.stopPropagation();
     this.panelExpanded[i] = true;
     this.loading[i] = true;
-    this.testService.getFunctionSourceCode(fileName, testName).subscribe((data:any)=>{
+    this.suggestFunction = functionName;
+    this.suggestedCode.set(functionName, '')
+    this.testService.getFunctionSourceCode(fileName, functionName).subscribe((data:any)=>{
       let gptprompt = `This is my test case ${data} can you please look for any error/optimization and provide me new code`
       this.gpt.getGptResponse(gptprompt.toString()).subscribe(response=>{
         this.loading[i]=false;
-
-    })
-    },()=>{},
-    ()=>{
-      
-
-
        
-        
-      }
-    );
+    })
+    });
   }
 }
