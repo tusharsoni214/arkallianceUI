@@ -16,4 +16,26 @@
 .custom-progress-bar {
     background-color: rgba(51, 51, 51, 0.205);
 }
+.card{
+    padding: 2vh;
+}
+.function{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.function-link{
+    cursor: pointer;
+    color: black;
+}
+.custom-progress-bar {
+    margin: 1vh;
+    --mdc-linear-progress-active-indicator-color: rgb(51, 51, 51);;
+    background-color: rgba(51, 51, 51, 0.205);
+}
+.action-btns{
+    display: flex;
+    gap: 1vw;
+}
+
 

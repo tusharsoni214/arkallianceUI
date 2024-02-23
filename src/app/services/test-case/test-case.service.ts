@@ -16,6 +16,9 @@ export class TestCaseService {
   cleanReport(){
     return this.http.get('http://127.0.0.1:5000/clean_report');
   }
+  stopLoadTest(){
+    return this.http.get('http://127.0.0.1:5000/stop_load_test');
+  }
   getFunctionSourceCode(fileName: string,testName: string){
     return this.http.get(`http://127.0.0.1:5000/suggest_code/${fileName}/${testName}`);
   }

@@ -1,7 +1,17 @@
 <div class="container">
     <div *ngFor="let fileName of getObjectKeys(testFileNames);let i = index" class="caseCard">
         <br>
-        <mat-accordion>
+        <div class="card" *ngIf="testType == 'LOAD'">
+            <mat-progress-bar *ngIf="loading[i]" class="custom-progress-bar" mode="indeterminate"></mat-progress-bar>
+            <div class="function">
+                <div><strong>{{fileName}}</strong></div>
+                <div class="action-btns">
+                    <button mat-flat-button color="warn" (click)="runTestCase(i,fileName,$event)" [disabled]="disableLoadBtn">Run</button>
+                    <button mat-flat-button color="primary" (click)="stopLoadTest(i)" [disabled]="disableStopBtn[i]">Stop</button>
+                </div>
+            </div>
+        </div>
+        <mat-accordion  *ngIf="testType != 'LOAD'">
             <mat-expansion-panel  (opened)="updatePanelState(i, true)" (closed)="updatePanelState(i, false)" [expanded]="panelExpanded[i]">
                 <mat-expansion-panel-header>
                     <mat-panel-title>
@@ -14,7 +24,7 @@
                 </mat-expansion-panel-header>
                 <mat-progress-bar *ngIf="loading[i]" class="custom-progress-bar" mode="indeterminate"></mat-progress-bar>
                 <br>
-                <app-test-case-functions [testFunctions]="testFileNames[fileName]" [fileName]="fileName" [testType]="testType" [logIndex]="logIndex"></app-test-case-functions>
+                <app-test-case-functions *ngIf="testType != 'LOAD'" [testFunctions]="testFileNames[fileName]" [fileName]="fileName" [testType]="testType" [logIndex]="logIndex"></app-test-case-functions>
             </mat-expansion-panel>
         </mat-accordion>
     </div>

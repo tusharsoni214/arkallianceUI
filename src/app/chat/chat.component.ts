@@ -27,7 +27,7 @@ export class ChatComponent implements OnInit,OnDestroy  {
 
   connectSocket(){
     this.socket = io("http://127.0.0.1:5000");
-    this.socket.on("message",(data:any)=>{
+    this.socket.on("chat",(data:any)=>{
       let gptResponse:Message ={
         owner: "ArkGPT",
         message: data.toString()
@@ -61,7 +61,7 @@ export class ChatComponent implements OnInit,OnDestroy  {
       message: this.gptprompt
     };
     this.chatMessages.push(message)
-    this.gpt.getGptResponse(this.gptprompt.toString()).subscribe(response=>{
+    this.gpt.getGptResponse(this.gptprompt.toString(),"chat").subscribe(response=>{
   })
    
     

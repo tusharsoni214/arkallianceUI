@@ -8,9 +8,9 @@ export class GptService {
 
   constructor(private http: HttpClient) { }
 
-  getGptResponse(message: string){
+  getGptResponse(message: string,emitBranch:string){
     const headers = new HttpHeaders()
     .set('Content-Type', 'application/json');
-    return this.http.post(`http://127.0.0.1:5000/get_gpt_response`,{message},{headers});
+    return this.http.post(`http://127.0.0.1:5000/get_gpt_response`,{message,emitBranch},{headers});
   }
 }

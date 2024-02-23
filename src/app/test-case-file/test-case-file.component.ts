@@ -39,7 +39,16 @@ export class TestCaseDetailComponent implements OnInit{
           this.testFileNames = names.database;
           break;
         }
+        case'LOAD':{
+          this.testType = "LOAD"
+          names.load = JSON.parse(names.load);
+          this.testFileNames = names.load;
+          break;
+        }
       }
+    },()=>{},()=>{
+        this.disableStopBtn = new Array(this.getObjectKeys(this.testFileNames).length).fill(true);
+
     });
   }
     //HTML functions
@@ -55,12 +64,25 @@ export class TestCaseDetailComponent implements OnInit{
   panelExpanded:boolean[]= new Array(this.testFileNames.length).fill(false);
   logs:string[]= new Array(this.testFileNames.length).fill('');
 
+  stopLoadTest(i:number){
+    this.testService.stopLoadTest().subscribe(result=>{
+      if(result){
+        this.disableLoadBtn = false
+        this.disableStopBtn[i] = true;
+      }
+    });
+  }
+  disableStopBtn:boolean[] = new Array(this.getObjectKeys(this.testFileNames).length).fill(true);
+  disableLoadBtn:boolean = false
   runTestCase(i:number,fileName:string,event:MouseEvent) {
     event.stopPropagation();
     this.panelExpanded[i]  = true;
     this.loading[i]=true
+    if(this.testType == "LOAD"){
+      this.disableLoadBtn = true;
+      this.disableStopBtn[i] = false;
+    }
     this.testService.runTestByFile(this.testType,fileName).subscribe((data:any) =>{
-      console.log(data);
       this.loading[i]=false;
       this.logs[i] = data.logs
       this.logService.showLogs(this.testType,this.logs[i])

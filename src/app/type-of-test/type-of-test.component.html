@@ -3,8 +3,8 @@
         <button mat-flat-button color="warn" (click)="runAllTestCases()">Run All Tests</button>
         <div>
             <button mat-flat-button color="primary" class="border-radius-left-0" (click)="generateReport()">Generate Report</button>
-            <button mat-flat-button [matMenuTriggerFor]="menu" color="primary" class="border-radius-right-0"  >
-                <mat-icon>more_vert</mat-icon>
+            <button mat-flat-button [matMenuTriggerFor]="menu" color="primary" class="border-radius-right-0 more-btn"  >
+                <mat-icon class="more-icon">more_vert</mat-icon>
             </button>
             <mat-menu #menu="matMenu">
                 <button mat-menu-item  (click)="cleanReport()">
@@ -26,12 +26,12 @@
                     </mat-panel-title>
                     <mat-panel-description class="panel-description">
                         This is a summary of the content
-                        <button mat-flat-button color="warn" (click)="runTestCase(i,test,$event)">Run</button>
+                        <button mat-flat-button *ngIf="test.toUpperCase() != 'LOAD'" color="warn" (click)="runTestCase(i,test,$event)">Run</button>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
                 <mat-progress-bar *ngIf="loading[i]" [ngClass]="{'custom-progress-bar-orange':test.toUpperCase().includes('DATABASE'),'custom-progress-bar-green':test.toUpperCase().includes('API'),'custom-progress-bar-red':test.toUpperCase().includes('LOAD')}"  mode="indeterminate"></mat-progress-bar>
                 <br>
-                <app-test-case-file [testType]="test" [logIndex] = "i" *ngIf="test.toUpperCase() != 'LOAD'"></app-test-case-file >
+                <app-test-case-file [testType]="test" [logIndex] = "i"></app-test-case-file >
                 <div class="log-box" *ngIf="test.toUpperCase() != 'LOAD'">
                     <h5>Logs</h5>
                     <p id="logBox{{test.toUpperCase()}}"></p>

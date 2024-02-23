@@ -40,7 +40,13 @@
     background: rgba(97,175,254,.1);
     border:1px solid #61affe ;
 }
-
+.more-icon{
+    margin: 0 !important;
+}
+.more-btn{
+    min-width: 0 !important;
+    padding: 10px;
+}
 .case-box-1{
     background: rgba(252,161,48,.1);
     border:1px solid #fca130 ;
