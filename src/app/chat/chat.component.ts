@@ -22,7 +22,7 @@ export class ChatComponent implements OnInit,OnDestroy  {
   }
   socket:any
   ngOnInit(): void {
-    this.connectSocket(); 
+    this.connectSocket();
   }
 
   connectSocket(){
@@ -49,10 +49,12 @@ export class ChatComponent implements OnInit,OnDestroy  {
   redirectToHome(){
     this.router.navigate(['/']);
   }
-  autoResize(textarea:any) {
-    if(textarea){
-      textarea.style.height = 'auto'
+  autoResize(textarea: any) {
+    if (textarea) {
+      let scrollTop = textarea.scrollTop;
+      textarea.style.height = 'auto';
       textarea.style.height = textarea.scrollHeight + 'px';
+      textarea.scrollTop = scrollTop; // Restore scroll position
     }
   }
   sendMessageToGpt(){
@@ -63,8 +65,8 @@ export class ChatComponent implements OnInit,OnDestroy  {
     this.chatMessages.push(message)
     this.gpt.getGptResponse(this.gptprompt.toString(),"chat").subscribe(response=>{
   })
-   
-    
+
+
     this.gptprompt = ''
   }
 }

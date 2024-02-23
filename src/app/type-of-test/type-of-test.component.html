@@ -22,7 +22,13 @@
             <mat-expansion-panel   (opened)="updatePanelState(i, true)" (closed)="updatePanelState(i, false)" [expanded]="panelExpanded[i]" [ngClass]="getPanelClass('case-box',i)">
                 <mat-expansion-panel-header  [ngClass]="getPanelClass('panel-header',i)">
                     <mat-panel-title>
-                        <h3>{{test}} Test Cases</h3>
+                      <div class="img-main">
+                        <img *ngIf="test == 'UI'" src="../../assets/img/icons8-ui-ux-design.gif">
+                        <img *ngIf="test == 'Database'" src="../../assets/img/icons8-database.gif">
+                        <img *ngIf="test == 'Api'" src="../../assets/img/icons8-rocket-unscreen.gif">
+                        <img *ngIf="test == 'Load'" src="../../assets/img/icons8-load-unscreen.gif">
+                      </div>
+                        <h4 class="header-title">{{test}} Test Cases</h4>
                     </mat-panel-title>
                     <mat-panel-description class="panel-description">
                         This is a summary of the content

@@ -37,7 +37,7 @@ $arkallianceUI-theme: mat.define-light-theme((
 html, body { 
   height: 100%;
 }
-body { 
+body {
   margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 .codeBlock{
@@ -87,3 +87,7 @@ pre code {
 }
 
 
+.mat-mdc-unelevated-button.mat-warn {
+  --mdc-filled-button-container-color: #d83159;
+  --mdc-filled-button-label-text-color: #fff;
+}
