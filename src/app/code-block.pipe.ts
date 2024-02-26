@@ -20,6 +20,7 @@ export class CodeBlockPipe implements PipeTransform {
 
       _value = value.replace(codeBlockRegex, `${html}<pre id='codeBlock' class=' language-python'><div class='code'><code>$2</code></div></pre></div>`)
     }
+    _value = value.replace('overandout','')
     return this.sanitizer.bypassSecurityTrustHtml(_value);
   }
 

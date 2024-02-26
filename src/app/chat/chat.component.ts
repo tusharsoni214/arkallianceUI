@@ -4,6 +4,7 @@ import { GptService } from '../services/gpt/gpt.service';
 import  {io} from 'socket.io-client';
 import hljs from 'highlight.js';
 import * as crypto from 'crypto-js'
+import { isEmpty } from 'rxjs';
 
 interface Message{
   owner: string;
@@ -28,21 +29,20 @@ export class ChatComponent implements OnInit,OnDestroy  {
 
   connectSocket(){
     this.socket = io("http://127.0.0.1:5000");
+    let gptResponse:Message ={
+      owner: "ArkGPT",
+      message:''
+    }
     this.socket.on("chat",(data:any)=>{
-      let gptResponse:Message ={
-        owner: "ArkGPT",
-        message: data.toString()
-      }
-      if(this.chatMessages.length %2 == 0){
-        this.chatMessages[this.chatMessages.length-1].message += data.toString(); 
-        if(this.chatMessages[this.chatMessages.length-1].message.includes("overandout")){
+      gptResponse.message += data.toString()
+        if(gptResponse.message.includes("overandout")){
+          gptResponse.message = gptResponse.message.replace("overandout","");
+          if(gptResponse.message)
+          this.chatMessages.push(gptResponse);
           setTimeout(() => {
             this.addListener(this.chatMessages[this.chatMessages.length-1].message)
           },0)
         }
-      }else{
-        this.chatMessages.push(gptResponse);
-      }
     })
   }
   addListener(value: string) {
