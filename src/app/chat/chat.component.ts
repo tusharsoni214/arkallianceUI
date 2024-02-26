@@ -33,7 +33,7 @@ export class ChatComponent implements OnInit,OnDestroy  {
         owner: "ArkGPT",
         message: data.toString()
       }
-      if(this.chatMessages[this.chatMessages.length-1].owner === "ArkGPT"){
+      if(this.chatMessages.length %2 == 0){
         this.chatMessages[this.chatMessages.length-1].message += data.toString(); 
         if(this.chatMessages[this.chatMessages.length-1].message.includes("overandout")){
           setTimeout(() => {
