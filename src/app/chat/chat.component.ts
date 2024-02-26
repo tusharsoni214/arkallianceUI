@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { GptService } from '../services/gpt/gpt.service';
 import  {io} from 'socket.io-client';
 import hljs from 'highlight.js';
+import * as crypto from 'crypto-js'
 
 interface Message{
   owner: string;
@@ -34,12 +35,40 @@ export class ChatComponent implements OnInit,OnDestroy  {
       }
       if(this.chatMessages[this.chatMessages.length-1].owner === "ArkGPT"){
         this.chatMessages[this.chatMessages.length-1].message += data.toString(); 
-        hljs.highlightAll();
+        if(this.chatMessages[this.chatMessages.length-1].message.includes("overandout")){
+          setTimeout(() => {
+            this.addListener(this.chatMessages[this.chatMessages.length-1].message)
+          },0)
+        }
       }else{
         this.chatMessages.push(gptResponse);
-        hljs.highlightAll();
       }
     })
+  }
+  addListener(value: string) {
+      if (value?.toLowerCase().includes('overandout')) {
+          setTimeout(()=>{
+            let id = crypto.MD5(value).toString();
+            hljs.highlightAll();
+            this.addEventListener(id);
+          },0)
+      }
+  }
+  addEventListener(id:string){
+    let element = document.getElementById(`copy-button-${id}`)
+    if(element){
+
+      element.addEventListener('click', function () {
+        var clipboard = this.getAttribute('clipboard-data') ?? '';
+        const textarea = document.createElement('textarea');
+        textarea.value = clipboard;
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textarea);
+        this.innerText = 'Copied!';
+      });
+    }
   }
   disconnectSocket(){
     this.socket.disconnect();
