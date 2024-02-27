@@ -18,6 +18,8 @@ import {MatIconModule} from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
 import {MatMenuModule} from '@angular/material/menu';
 import { CodeBlockPipe } from './code-block.pipe';
+import { CodeEditorComponent } from './code-editor/code-editor.component';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +28,8 @@ import { CodeBlockPipe } from './code-block.pipe';
     TestCaseDetailComponent,
     TestCaseFunctionsComponent,
     ChatComponent,
-    CodeBlockPipe
+    CodeBlockPipe,
+    CodeEditorComponent
   ],
   imports: [
     BrowserModule,
