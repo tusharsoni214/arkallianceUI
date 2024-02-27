@@ -1,7 +1,7 @@
 .chat-response{
     display: flex;
     flex-direction: column-reverse;
-    background-color: #14141408;
+    background-color: #141414da;
     min-height: 65vh;
     max-height: 65vh;
     overflow: auto;
@@ -43,37 +43,34 @@
     position: relative;
     margin-bottom: 5px;
     .owner{
-        color: black;
+        color: rgb(35 110 222);
         font-weight: 500;
     }
     .content{
         white-space: pre-wrap;
-<<<<<<< HEAD
-        color: black;
-=======
         pre{
             width: 60% !important;
         }
->>>>>>> 7ccd996443b76277f643101a52c87f8876fb9e33
+>>>>>>>>> Temporary merge branch 2
     }
 }
-.you-message{
-  background-color: aliceblue;
-  border: 1px solid #42aaff;
-  border-radius: 25px;
-  padding: 10px;
-}
+// .you-message{
+//   background-color: aliceblue;
+//   border: 1px solid #42aaff;
+//   border-radius: 25px;
+//   padding: 10px;
+// }
 .myMessage{
     display: flex;
     justify-content: end;
 
 }
-.arkgpt-message {
-  background-color: pink;
-  border: 1px solid #db4962;
-  border-radius: 25px;
-  padding: 10px;
-}
+// .arkgpt-message {
+//   background-color: pink;
+//   border: 1px solid #db4962;
+//   border-radius: 25px;
+//   padding: 10px;
+// }
 
 
 ::ng-deep .mat-icon {
