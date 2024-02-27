@@ -13,7 +13,7 @@
         <div class="textarea-container">
             <textarea id="message" (keydown.enter)="sendMessageToGpt()" class="chat-input" placeholder="Message ArkGPT" rows="1" [(ngModel)]="gptprompt" (input)="autoResize($event.target)"></textarea>
             <!-- <span class="textarea" role="textbox" contenteditable ></span> -->
-            <button mat-icon-button class="send-message-button" (click)="sendMessageToGpt()">
+            <button mat-icon-button class="send-message-button" (click)="sendMessageToGpt()" [class.spinner]="loading" [disabled]="loading">
                 <mat-icon>arrow_upward</mat-icon>
             </button>
         </div>
