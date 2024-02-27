@@ -54,31 +54,22 @@ export class AddTestComponent implements OnInit {
   connectSocket(){
     this.socket = io("http://127.0.0.1:5000");
     this.socket.on("addTestCase",(data:any)=>{
-      
-      // if(this.code.includes('overandout')){
-      //   const codeBlockRegex = /```(\w+)\s*([\s\S]*?)```/gs;
-      //   this.code = codeBlockRegex.exec(this.code)![2];
-      //   console.log('Code',this.code);
-      //   const editorView = new EditorView({
-      //     state: EditorState.create({
-      //       doc: this.code,
-      //       extensions: [
-      //         basicSetup,
-      //         pythonLanguage,
-      //         oneDarkTheme
-      //       ]
-      //     }),
-      //     parent: this.editorElementRef.nativeElement,
-      //   });
-      // }
       this.tempRes +=data.toString();
       if(this.tempRes.includes('overandout')){
+        this.tempRes.replace('overandout','');
         const codeBlockRegex = /```(\w+)\s*([\s\S]*?)```/gs;
-        this.gptCode = codeBlockRegex.exec(this.tempRes)![2];
+        if(this.tempRes.includes("```")){
+
+          this.gptCode = codeBlockRegex.exec(this.tempRes)?.[2]??''
+        }else{
+          this.gptCode = this.tempRes
+        }
+        this.tempRes = '';
       }
   });
 }
-  autoResize(textarea: any) {
+  autoResize() {
+    let textarea = document.getElementById('chat-textarea');
     if (textarea) {
       let scrollTop = textarea.scrollTop;
       textarea.style.height = 'auto';
@@ -113,21 +104,25 @@ export class AddTestComponent implements OnInit {
       code = this.text_editor_code
     }
     this.testService.addTestCase(this.data.testType.toUpperCase(),fileName,code).subscribe(res=>{
-      console.log(res);
+      this.toast.success("Test added successfully")
       this.dialogRef.close();
     })
   }
   onCodeChange(newCode:string){
-    if(this.selectedFile === 'new'){
-      this.text_editor_code = newCode;
-    }else{
+    let code = '';
+    if(this.selectedTabIndex == 0){
       this.gptCode = newCode;
+
+    }else{
+      this.text_editor_code = newCode
     }
-    console.log("event",event);
   }
   sendMessageToGpt(event: MouseEvent|Event){
+    let prompt = this.gptprompt
+    this.gptprompt=''
+    this.autoResize();
     event.stopPropagation();
-    this.gpt.getGptResponse(this.gptprompt.toString(),"addTestCase").subscribe(response=>{
+    this.gpt.getGptResponse(prompt.toString(),"addTestCase").subscribe(response=>{
         this.gptprompt = '';
 
     })

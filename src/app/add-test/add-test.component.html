@@ -23,9 +23,9 @@
       <app-code-editor [code]="gptCode" *ngIf="gptCode.length>0"  (codeChange)="onCodeChange($event)"></app-code-editor>
       
       <div class="textarea-container">
-        <textarea id="message" class="chat-input" (keydown.enter)="sendMessageToGpt($event)" class="chat-input"
+        <textarea id="chat-textarea" class="chat-input" (keydown.enter)="sendMessageToGpt($event)" class="chat-input"
           placeholder="Message ArkGPT" rows="1" [(ngModel)]="gptprompt" placeholder="Message ArkGPT" rows="1"
-          (input)="autoResize($event.target)"></textarea>
+          (input)="autoResize()"></textarea>
         <!-- <span class="textarea" role="textbox" contenteditable ></span> -->
         <button mat-icon-button class="send-message-button" (click)="sendMessageToGpt($event)">
           <mat-icon>arrow_upward</mat-icon>
