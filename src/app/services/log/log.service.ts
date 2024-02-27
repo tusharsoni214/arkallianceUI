@@ -8,10 +8,10 @@ export class LogService {
   constructor() { }
 
   showLogs(testType: string, logs: string) {
-    const logElement = document.getElementById('logBox' + testType.toUpperCase());
-    if (logElement) {
-      logElement.innerText = ''; // Clear existing content
-      this.typeLogs(logs, 0, logElement);
+    const Element = document.getElementById('logBox' + testType.toUpperCase());
+    if (Element) {
+      Element.innerText = ''; // Clear existing content
+      this.typeLogs(logs, 0, Element);
     }
   }
   typeLogs(logs: string, index: number, logElement: HTMLElement) {
@@ -19,7 +19,7 @@ export class LogService {
       if (logs[index] === '\n') {
         logElement.appendChild(document.createElement('br'));
       } else {
-        logElement.innerText += logs[index];
+        logElement.innerHTML += logs[index];
       }
       index++;
       setTimeout(() => this.typeLogs(logs, index, logElement), 5);

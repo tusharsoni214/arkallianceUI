@@ -6,9 +6,9 @@
             <div class="message" *ngFor="let message of chatMessages.reverse()">
               <div class="main-message" [ngClass]="{'you-message':message.owner == 'YOU' , 'arkgpt-message': message.owner == 'ArkGPT'}" >
                 <div class="owner" [ngClass]="{'myMessage':message.owner == 'YOU'}" >{{message.owner}}</div>
-                <div class="content"  [ngClass]="{'myMessage':message.owner == 'YOU'}">{{message.message}}</div>
-              </div>
-        </div>
+                <div class="content"  [ngClass]="{'myMessage':message.owner == 'YOU'}" [innerHTML]="message.message | codeBlock"></div>
+            </div>
+
         </div>
         <div class="textarea-container">
             <textarea id="message" (keydown.enter)="sendMessageToGpt()" class="chat-input" placeholder="Message ArkGPT" rows="1" [(ngModel)]="gptprompt" (input)="autoResize($event.target)"></textarea>

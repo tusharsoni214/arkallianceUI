@@ -25,14 +25,65 @@ $arkallianceUI-theme: mat.define-light-theme((
     padding: 0;
     font-family: monospace;
 }
-
+.codeblock-heading {
+  background-color: #686868;
+  display: flex;
+  // border-top-left-radius: 10px;
+  // border-top-right-radius: 10px;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 0.2vw 1vw;
+}
 html, body {
   height: 100%;
 }
 body {
   margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-.mat-mdc-unelevated-button.mat-warn {
-  --mdc-filled-button-container-color: #d83159;
-  --mdc-filled-button-label-text-color: #fff;
+.codeBlock{
+  border-radius: 10px;
+  overflow: hidden;
+  background-color: #282b2e;
 }
+pre{
+  margin: 0 !important;
+}
+// pre#codeBlock {
+//   border-bottom-left-radius: 10px;
+//   border-bottom-right-radius: 10px;
+// }
+pre code {
+  color: #a9b7c6;
+}
+.code{
+  padding: 15px;
+}
+// .codeblock-heading {
+//   background-color: #4c4c4c;
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: center;
+//   padding: 0.2rem 1.5rem;
+// }
+// pre {
+//   background-color: black;
+//   display: block;
+//   margin-top: 0;
+//   margin-bottom: 1rem;
+//   overflow: auto;
+//   font-size: 0.875em;
+//   width: 50%;
+//   color: white;
+//   border-radius: 10px;
+// }
+// .code {
+//   padding: 1rem;
+// }
+.copy-button{
+    padding: 4px;
+    border-radius: 6px;
+    background: #6b6b6b;
+    color: white;
+}
+
+

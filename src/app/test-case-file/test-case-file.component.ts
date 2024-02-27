@@ -22,6 +22,7 @@ export class TestCaseDetailComponent implements OnInit{
     this.testService.getTestNames().subscribe((names:any) => {
       switch(this.testType.toUpperCase()){
         case'UI':{
+          console.log(names.ui) 
           names.ui = JSON.parse(names.ui);
           this.testFileNames = names.ui
           break;
@@ -38,7 +39,16 @@ export class TestCaseDetailComponent implements OnInit{
           this.testFileNames = names.database;
           break;
         }
+        case'LOAD':{
+          this.testType = "LOAD"
+          names.load = JSON.parse(names.load);
+          this.testFileNames = names.load;
+          break;
+        }
       }
+    },()=>{},()=>{
+        this.disableStopBtn = new Array(this.getObjectKeys(this.testFileNames).length).fill(true);
+
     });
   }
     //HTML functions
@@ -49,17 +59,30 @@ export class TestCaseDetailComponent implements OnInit{
     this.panelExpanded[index] = expanded;
   }
 
-  testFileNames:any= ['Test Case 1','Test Case 2','Test Case 3','Test Case 4'];
+  testFileNames:any= JSON.parse('{"test_login.py": ["test_google_title", "test_search_selenium"]}');
   loading: boolean[] = new Array(this.testFileNames.length).fill(false);
   panelExpanded:boolean[]= new Array(this.testFileNames.length).fill(false);
   logs:string[]= new Array(this.testFileNames.length).fill('');
 
+  stopLoadTest(i:number){
+    this.testService.stopLoadTest().subscribe(result=>{
+      if(result){
+        this.disableLoadBtn = false
+        this.disableStopBtn[i] = true;
+      }
+    });
+  }
+  disableStopBtn:boolean[] = new Array(this.getObjectKeys(this.testFileNames).length).fill(true);
+  disableLoadBtn:boolean = false
   runTestCase(i:number,fileName:string,event:MouseEvent) {
     event.stopPropagation();
     this.panelExpanded[i]  = true;
     this.loading[i]=true
+    if(this.testType == "LOAD"){
+      this.disableLoadBtn = true;
+      this.disableStopBtn[i] = false;
+    }
     this.testService.runTestByFile(this.testType,fileName).subscribe((data:any) =>{
-      console.log(data);
       this.loading[i]=false;
       this.logs[i] = data.logs
       this.logService.showLogs(this.testType,this.logs[i])

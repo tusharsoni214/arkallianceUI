@@ -1,12 +1,24 @@
 <div class="container">
     <div class="run-all-btn">
         <button mat-flat-button color="warn" (click)="runAllTestCases()">Run All Tests</button>
+        <div>
+            <button mat-flat-button color="primary" class="border-radius-left-0" (click)="generateReport()">Generate Report</button>
+            <button mat-flat-button [matMenuTriggerFor]="menu" color="primary" class="border-radius-right-0 more-btn"  >
+                <mat-icon class="more-icon">more_vert</mat-icon>
+            </button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item  (click)="cleanReport()">
+                <span>Clean reports</span>
+                </button>
+            </mat-menu>
+        </div>
+
     </div>
     <br>
     <mat-progress-bar *ngIf="allLoading" class="custom-progress-bar" mode="indeterminate"></mat-progress-bar>
     <div *ngFor="let test of testTypes;let i=index;" class="caseCard">
         <br>
-        <mat-accordion  >
+        <mat-accordion>
             <mat-expansion-panel   (opened)="updatePanelState(i, true)" (closed)="updatePanelState(i, false)" [expanded]="panelExpanded[i]" [ngClass]="getPanelClass('case-box',i)">
                 <mat-expansion-panel-header  [ngClass]="getPanelClass('panel-header',i)">
                     <mat-panel-title>
@@ -20,13 +32,13 @@
                     </mat-panel-title>
                     <mat-panel-description class="panel-description">
                         This is a summary of the content
-                        <button mat-flat-button color="warn" (click)="runTestCase(i,test,$event)">Run</button>
+                        <button mat-flat-button *ngIf="test.toUpperCase() != 'LOAD'" color="warn" (click)="runTestCase(i,test,$event)">Run</button>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
                 <mat-progress-bar *ngIf="loading[i]" [ngClass]="{'custom-progress-bar-orange':test.toUpperCase().includes('DATABASE'),'custom-progress-bar-green':test.toUpperCase().includes('API'),'custom-progress-bar-red':test.toUpperCase().includes('LOAD')}"  mode="indeterminate"></mat-progress-bar>
                 <br>
                 <app-test-case-file [testType]="test" [logIndex] = "i"></app-test-case-file >
-                <div class="log-box">
+                <div class="log-box" *ngIf="test.toUpperCase() != 'LOAD'">
                     <h5>Logs</h5>
                     <p id="logBox{{test.toUpperCase()}}"></p>
                 </div>

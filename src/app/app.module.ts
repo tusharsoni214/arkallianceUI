@@ -16,6 +16,8 @@ import { HotToastModule } from '@ngneat/hot-toast';
 import { ChatComponent } from './chat/chat.component';
 import {MatIconModule} from '@angular/material/icon';
 import { FormsModule } from '@angular/forms';
+import {MatMenuModule} from '@angular/material/menu';
+import { CodeBlockPipe } from './code-block.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +25,8 @@ import { FormsModule } from '@angular/forms';
     TypeOfTestComponent,
     TestCaseDetailComponent,
     TestCaseFunctionsComponent,
-    ChatComponent
+    ChatComponent,
+    CodeBlockPipe
   ],
   imports: [
     BrowserModule,
@@ -35,7 +38,8 @@ import { FormsModule } from '@angular/forms';
     MatProgressBarModule,
     HotToastModule,
     MatIconModule,
-    FormsModule
+    FormsModule,
+    MatMenuModule
   ],
   providers: [
 

@@ -47,9 +47,14 @@
         font-weight: 500;
     }
     .content{
-        font-size: large;
         white-space: pre-wrap;
+<<<<<<< HEAD
         color: black;
+=======
+        pre{
+            width: 60% !important;
+        }
+>>>>>>> 7ccd996443b76277f643101a52c87f8876fb9e33
     }
 }
 .you-message{

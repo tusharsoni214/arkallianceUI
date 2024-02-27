@@ -2,6 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GptService } from '../services/gpt/gpt.service';
 import  {io} from 'socket.io-client';
+import hljs from 'highlight.js';
 
 interface Message{
   owner: string;
@@ -26,15 +27,17 @@ export class ChatComponent implements OnInit,OnDestroy  {
 
   connectSocket(){
     this.socket = io("http://127.0.0.1:5000");
-    this.socket.on("message",(data:any)=>{
+    this.socket.on("chat",(data:any)=>{
       let gptResponse:Message ={
         owner: "ArkGPT",
         message: data.toString()
       }
       if(this.chatMessages[this.chatMessages.length-1].owner === "ArkGPT"){
         this.chatMessages[this.chatMessages.length-1].message += data.toString();
+        hljs.highlightAll();
       }else{
         this.chatMessages.push(gptResponse);
+        hljs.highlightAll();
       }
     })
   }
@@ -60,7 +63,7 @@ export class ChatComponent implements OnInit,OnDestroy  {
       message: this.gptprompt
     };
     this.chatMessages.push(message)
-    this.gpt.getGptResponse(this.gptprompt.toString()).subscribe(response=>{
+    this.gpt.getGptResponse(this.gptprompt.toString(),"chat").subscribe(response=>{
   })
 
 

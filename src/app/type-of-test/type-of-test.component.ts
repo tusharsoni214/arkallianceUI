@@ -14,7 +14,7 @@ export class TypeOfTestComponent implements OnInit{
   apiCases: any;
   openai:any
   ngOnInit(): void {
-
+    this.testService.cleanReport().subscribe();
   }
 
     testTypes:string[] = ["UI", "Database", "Api", "Load"];
@@ -25,6 +25,26 @@ export class TypeOfTestComponent implements OnInit{
     }
     updatePanelState(index: number, expanded: boolean) {
       this.panelExpanded[index] = expanded;
+    }
+    generateReport(){
+      this.testService.generateReport().subscribe(result=>{
+        console.log(result);
+        if(result){
+          this.toast.success("Report generated successfully")
+        }else{
+          this.toast.error("An error occured while generating the reports");
+        }
+      });
+    }
+
+    cleanReport(){
+      this.testService.cleanReport().subscribe(result=>{
+        if(result){
+          this.toast.success("Report cleaned successfully")
+        }else{
+          this.toast.error("An error occured while cleaning the reports");
+        }
+      });
     }
     loading: boolean[] = new Array(this.testTypes.length).fill(false);
     logs:string[]= new Array(this.testTypes.length).fill('');

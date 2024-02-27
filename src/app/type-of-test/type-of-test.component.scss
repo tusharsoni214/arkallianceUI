@@ -1,9 +1,20 @@
 .run-all-btn{
     display: flex;
     justify-content: end;
+    gap: 1vw;
 }
 .caseCard{
     // margin: 5vh 0;
+}
+
+.border-radius-left-0{
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  
+}
+.border-radius-right-0{
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
 }
 .panel-description{
     display: flex;
@@ -29,7 +40,13 @@
     background: rgba(97,175,254,.1);
     border:1px solid #61affe ;
 }
-
+.more-icon{
+    margin: 0 !important;
+}
+.more-btn{
+    min-width: 0 !important;
+    padding: 10px;
+}
 .case-box-1{
     background: rgba(252,161,48,.1);
     border:1px solid #fca130 ;

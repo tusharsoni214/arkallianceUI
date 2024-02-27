@@ -10,8 +10,17 @@ export class TestCaseService {
   getTestNames(){
     return this.http.get('http://127.0.0.1:5000/all_test_names');
   }
-  getFunctionSourceCode(testTypes: string,fileName: string,testName: string){
-    return this.http.get(`http://127.0.0.1:5000/suggest_code/${testTypes}/${fileName}/${testName}`);
+  generateReport(){
+    return this.http.get('http://127.0.0.1:5000/generate_report');
+  }
+  cleanReport(){
+    return this.http.get('http://127.0.0.1:5000/clean_report');
+  }
+  stopLoadTest(){
+    return this.http.get('http://127.0.0.1:5000/stop_load_test');
+  }
+  getFunctionSourceCode(fileName: string,testName: string){
+    return this.http.get(`http://127.0.0.1:5000/suggest_code/${fileName}/${testName}`);
   }
   runAllTests()  {
     return this.http.get(`http://127.0.0.1:5000/run_all_tests`);
