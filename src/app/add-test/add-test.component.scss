@@ -1,0 +1,41 @@
+.mat-dialog-btns{
+    display: flex;
+    justify-content: end;
+    gap: 0.5vw;
+}
+.textarea-container{
+    border:1px solid rgba(0, 0, 0, 0.432);
+    display: flex;
+    align-items: center;
+    margin-top: 4vh;
+    justify-content: space-between;
+    border-radius: 20px;
+    padding: 0 2vh;
+}
+.chat-input {
+    overflow: hidden;
+    resize: none;
+    height: auto;
+    border: none;
+    width: 100%;
+}
+.chat-input:focus-visible {
+    overflow: hidden;
+    resize: none;
+    border: none;
+    outline: none;
+}
+.dialog-sub-heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2vh 0;
+}
+.heading{
+    display: flex;
+    justify-content: space-between;
+    margin: 2vh 1vw;
+}
+.mat-mdc-form-field-subscript-wrapper{
+    display: none;
+}

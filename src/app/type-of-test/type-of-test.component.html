@@ -16,7 +16,7 @@
     </div>
     <br>
     <mat-progress-bar *ngIf="allLoading" class="custom-progress-bar" mode="indeterminate"></mat-progress-bar>
-    <app-code-editor></app-code-editor>
+    <app-code-editor code="def hello_world():print('Hello, world!')hello_world()"></app-code-editor>
     <div *ngFor="let test of testTypes;let i=index;" class="caseCard">
         <br>
         <mat-accordion>
@@ -33,7 +33,10 @@
                     </mat-panel-title>
                     <mat-panel-description class="panel-description">
                         This is a summary of the content
-                        <button mat-flat-button *ngIf="test.toUpperCase() != 'LOAD'" color="warn" (click)="runTestCase(i,test,$event)">Run</button>
+                        <div class="action-btns">
+                            <button mat-flat-button *ngIf="test.toUpperCase() != 'LOAD'" color="warn" (click)="runTestCase(i,test,$event)">Run</button>
+                            <button mat-flat-button *ngIf="test.toUpperCase() != 'LOAD'" color="primary" (click)="addTestCase(i,test,$event)">Add Test Case</button>
+                        </div>
                     </mat-panel-description>
                 </mat-expansion-panel-header>
                 <mat-progress-bar *ngIf="loading[i]" [ngClass]="{'custom-progress-bar-orange':test.toUpperCase().includes('DATABASE'),'custom-progress-bar-green':test.toUpperCase().includes('API'),'custom-progress-bar-red':test.toUpperCase().includes('LOAD')}"  mode="indeterminate"></mat-progress-bar>

@@ -19,7 +19,12 @@ import { FormsModule } from '@angular/forms';
 import {MatMenuModule} from '@angular/material/menu';
 import { CodeBlockPipe } from './code-block.pipe';
 import { CodeEditorComponent } from './code-editor/code-editor.component';
-
+import {MatDialogModule} from '@angular/material/dialog';
+import { AddTestComponent } from './add-test/add-test.component';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
+import {MatTabsModule} from '@angular/material/tabs';
+import {MatInputModule} from '@angular/material/input';
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,7 +34,8 @@ import { CodeEditorComponent } from './code-editor/code-editor.component';
     TestCaseFunctionsComponent,
     ChatComponent,
     CodeBlockPipe,
-    CodeEditorComponent
+    CodeEditorComponent,
+    AddTestComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +48,12 @@ import { CodeEditorComponent } from './code-editor/code-editor.component';
     HotToastModule,
     MatIconModule,
     FormsModule,
-    MatMenuModule
+    MatSelectModule,
+    MatMenuModule,
+    MatDialogModule,
+    MatTabsModule,
+    MatFormFieldModule,
+    MatInputModule
   ],
   providers: [
   

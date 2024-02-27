@@ -3,6 +3,8 @@ import { TestCaseService } from '../services/test-case/test-case.service';
 import { LogService } from '../services/log/log.service';
 import { HotToastService } from '@ngneat/hot-toast';
 import OpenAI from "openai";
+import { MatDialog } from '@angular/material/dialog';
+import { AddTestComponent } from '../add-test/add-test.component';
 @Component({
   selector: 'app-type-of-test',
   templateUrl: './type-of-test.component.html',
@@ -10,11 +12,16 @@ import OpenAI from "openai";
 })
 export class TypeOfTestComponent implements OnInit{
   allLoading: boolean = false;
-  constructor(private testService: TestCaseService,private logService:LogService,private toast: HotToastService) { }
+  constructor(private testService: TestCaseService,private logService:LogService,private toast: HotToastService,public dialog: MatDialog) { }
   apiCases: any;
   openai:any
+  files:any;
   ngOnInit(): void {
     this.testService.cleanReport().subscribe();
+    this.testService.getTestNames().subscribe(res=>{
+      console.log(res);
+      this.files = res;
+    })
   }
 
     testTypes:string[] = ["UI", "Database", "Api", "Load"];
@@ -60,6 +67,18 @@ export class TypeOfTestComponent implements OnInit{
         this.toast.success(data.message);
        this.logService.showLogs(testType,this.logs[i])
       });
+    }
+    addTestCase(i:number,testType:string,event:MouseEvent) {
+      event.stopPropagation();
+      const dialogRef = this.dialog.open(AddTestComponent,{
+        data:{
+          Files:this.files,
+          testType:testType
+        },
+        autoFocus:false,
+        minWidth:'50vw'
+      })
+      console.log("addTestCase",i,testType,event)
     }
   //  async runAllTestCases(){
   //   try {

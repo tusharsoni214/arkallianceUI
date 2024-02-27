@@ -95,7 +95,6 @@ export class ChatComponent implements OnInit,OnDestroy  {
     this.gpt.getGptResponse(this.gptprompt.toString(),"chat").subscribe(response=>{
   })
 
-
     this.gptprompt = ''
   }
 }
