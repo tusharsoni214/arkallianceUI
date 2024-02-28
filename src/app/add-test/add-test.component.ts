@@ -14,7 +14,8 @@ export class AddTestComponent implements OnInit {
   constructor(private toast: HotToastService,  @Inject(MAT_DIALOG_DATA) public data: any,private gpt:GptService,private testService:TestCaseService,private dialogRef: MatDialogRef<AddTestComponent>) { }
   selectedFile:string = '';
   newFileName:string = '';
-  text_editor_code = 'def factorial(n):\n    if n == 0:\n        return 1\n    else:\n        return n * factorial(n - 1)\n\n# Test the function\nnumber = 5\nprint(f"The factorial of {number} is {factorial(number)}")\n'
+  
+  text_editor_code = "def test_google_title(google_page):\n    google_page.open()\n    assert google_page.title == 'Google'"
   loading : boolean = false;
   ngOnInit(): void {
     this.connectSocket();
@@ -122,6 +123,7 @@ export class AddTestComponent implements OnInit {
     this.gptprompt=''
     this.autoResize();
     event.stopPropagation();
+    prompt  += '\n Note : Please provide a only one test script in such a way that it does not have any dependencies on any other function or anything and is self sufficient to run on its own'
     this.gpt.getGptResponse(prompt.toString(),"addTestCase").subscribe(response=>{
         this.gptprompt = '';
 

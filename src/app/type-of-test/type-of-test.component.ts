@@ -81,7 +81,8 @@ export class TypeOfTestComponent implements OnInit{
           testType:testType
         },
         autoFocus:false,
-        minWidth:'50vw'
+        minWidth:'50vw',
+        minHeight:'70vh'
       })
       dialogRef.afterClosed().subscribe(data=>{
 

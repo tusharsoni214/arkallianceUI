@@ -3,6 +3,18 @@
     justify-content: end;
     gap: 0.5vw;
 }
+.container{
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+}
+.mat-tab-arkgpt{
+    display: flex;
+
+}
+.tab-group{
+    height: 100%;
+}
 .textarea-container{
     border:1px solid rgba(0, 0, 0, 0.432);
     display: flex;
