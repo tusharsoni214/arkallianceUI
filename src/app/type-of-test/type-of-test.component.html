@@ -31,7 +31,6 @@
                         <h4 class="header-title">{{test}} Test Cases</h4>
                     </mat-panel-title>
                     <mat-panel-description class="panel-description">
-                        This is a summary of the content
                         <div class="action-btns">
                             <button mat-flat-button *ngIf="test.toUpperCase() != 'LOAD'" color="warn" (click)="runTestCase(i,test,$event)">Run</button>
                             <button mat-flat-button *ngIf="test.toUpperCase() != 'LOAD'" color="primary" (click)="addTestCase(i,test,$event)">Add Test Case</button>
