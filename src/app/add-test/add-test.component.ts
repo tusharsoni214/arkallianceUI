@@ -15,7 +15,7 @@ export class AddTestComponent implements OnInit {
   selectedFile:string = '';
   newFileName:string = '';
   text_editor_code = 'def factorial(n):\n    if n == 0:\n        return 1\n    else:\n        return n * factorial(n - 1)\n\n# Test the function\nnumber = 5\nprint(f"The factorial of {number} is {factorial(number)}")\n'
-
+  loading : boolean = false;
   ngOnInit(): void {
     this.connectSocket();
     this.files = this.data.Files
@@ -57,6 +57,7 @@ export class AddTestComponent implements OnInit {
       this.tempRes +=data.toString();
       if(this.tempRes.includes('overandout')){
         this.tempRes.replace('overandout','');
+        this.loading = false;
         const codeBlockRegex = /```(\w+)\s*([\s\S]*?)```/gs;
         if(this.tempRes.includes("```")){
 
@@ -116,6 +117,7 @@ export class AddTestComponent implements OnInit {
     }
   }
   sendMessageToGpt(event: MouseEvent|Event){
+    this.loading = true;
     let prompt = this.gptprompt
     this.gptprompt=''
     this.autoResize();

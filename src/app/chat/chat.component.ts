@@ -19,6 +19,7 @@ interface Message{
 })
 export class ChatComponent implements OnInit,OnDestroy  {
   constructor(private router:Router,private gpt:GptService){}
+  loading : boolean = false;
   ngOnDestroy(): void {
     this.disconnectSocket()
   }
@@ -37,6 +38,7 @@ export class ChatComponent implements OnInit,OnDestroy  {
       gptResponse.message += data.toString()
         if(gptResponse.message.includes("overandout")){
           gptResponse.message = gptResponse.message.replace("overandout","");
+          this.loading = false;
           if(gptResponse.message)
           this.chatMessages.push(gptResponse);
           setTimeout(() => {
@@ -87,6 +89,7 @@ export class ChatComponent implements OnInit,OnDestroy  {
     }
   }
   sendMessageToGpt(){
+    this.loading = true;
     let message:Message = {
       owner: "YOU",
       message: this.gptprompt

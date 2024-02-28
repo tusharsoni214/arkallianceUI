@@ -39,3 +39,29 @@
 .mat-mdc-form-field-subscript-wrapper{
     display: none;
 }
+.send-message-button{
+    --mdc-icon-button-icon-color:white !important;
+    margin: 0.5vh 0;
+    border-radius: 10px;
+    background-color: rgb(146, 146, 146);
+    background-color: #141414
+}
+@keyframes spinner {
+    to {transform: rotate(360deg);}
+  }
+  
+  .spinner:before {
+    content: '';
+    box-sizing: border-box;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    margin-top: -10px;
+    margin-left: -10px;
+    border-radius: 50%;
+    border: 2px solid #ffffff;
+    border-top-color: #000000;
+    animation: spinner .8s linear infinite;
+  }

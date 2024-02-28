@@ -2,7 +2,7 @@
     <div class="run-all-btn">
         <button mat-flat-button color="warn" (click)="runAllTestCases()">Run All Tests</button>
         <div>
-            <button mat-flat-button color="primary" class="border-radius-left-0" (click)="generateReport()">Generate Report</button>
+            <button mat-flat-button color="primary" class="border-radius-left-0" (click)="generateReport()" [class.spinner]="reportLoading" [disabled]="reportLoading">Generate Report</button>
             <button mat-flat-button [matMenuTriggerFor]="menu" color="primary" class="border-radius-right-0 more-btn"  >
                 <mat-icon class="more-icon">more_vert</mat-icon>
             </button>

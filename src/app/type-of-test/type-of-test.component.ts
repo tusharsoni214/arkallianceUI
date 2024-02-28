@@ -16,6 +16,7 @@ export class TypeOfTestComponent implements OnInit{
   apiCases: any;
   openai:any
   files:any;
+  reportLoading : boolean = false;
   ngOnInit(): void {
     this.testService.cleanReport().subscribe();
     this.testService.getTestNames().subscribe(res=>{
@@ -36,9 +37,11 @@ export class TypeOfTestComponent implements OnInit{
       this.panelExpanded[index] = expanded;
     }
     generateReport(){
+      this.reportLoading = true;
       this.testService.generateReport().subscribe(result=>{
         console.log(result);
         if(result){
+          this.reportLoading = false;
           this.toast.success("Report generated successfully")
         }else{
           this.toast.error("An error occured while generating the reports");
@@ -80,20 +83,11 @@ export class TypeOfTestComponent implements OnInit{
         autoFocus:false,
         minWidth:'50vw'
       })
-      console.log("addTestCase",i,testType,event)
-    }
-  //  async runAllTestCases(){
-  //   try {
-  //     const stream = await this.openai.chat.completions.create({
-  //         model: "gpt-3.5-turbo",
-  //         messages: [{ role: "user", content: "Helloooo" }],
-  //     });
-  //     console.log(await stream);
-  // } catch (error) {
-  //     console.error("Error occurred:", error);
-  // }
+      dialogRef.afterClosed().subscribe(data=>{
 
-  //   }
+        window.location.reload();
+      })
+    }
     runAllTestCases(){
       this.allLoading = true;
       this.testService.runAllTests().subscribe((data:any)=>{

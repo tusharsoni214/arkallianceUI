@@ -27,7 +27,7 @@
           placeholder="Message ArkGPT" rows="1" [(ngModel)]="gptprompt" placeholder="Message ArkGPT" rows="1"
           (input)="autoResize()"></textarea>
         <!-- <span class="textarea" role="textbox" contenteditable ></span> -->
-        <button mat-icon-button class="send-message-button" (click)="sendMessageToGpt($event)">
+        <button mat-icon-button class="send-message-button" (click)="sendMessageToGpt($event)" [class.spinner]="loading" [disabled]="loading">
           <mat-icon>arrow_upward</mat-icon>
         </button>
       </div>
