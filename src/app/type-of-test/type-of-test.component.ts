@@ -21,6 +21,8 @@ export class TypeOfTestComponent implements OnInit{
     this.testService.getTestNames().subscribe(res=>{
       console.log(res);
       this.files = res;
+    },(error)=>{
+      this.toast.error("Compilation error, Api stopped working")
     })
   }
 
