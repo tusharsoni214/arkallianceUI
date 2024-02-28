@@ -109,10 +109,8 @@ export class AddTestComponent implements OnInit {
     })
   }
   onCodeChange(newCode:string){
-    let code = '';
     if(this.selectedTabIndex == 0){
       this.gptCode = newCode;
-
     }else{
       this.text_editor_code = newCode
     }
