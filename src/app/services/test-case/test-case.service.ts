@@ -7,6 +7,9 @@ export class TestCaseService {
 
   constructor(private http: HttpClient) { }
 
+  addTestCase(testType: string,fileName:string,testCase:string){
+    return this.http.post(`http://127.0.0.1:5000/create_test/${testType}/${fileName}`,{testCase});
+  }
   getTestNames(){
     return this.http.get('http://127.0.0.1:5000/all_test_names');
   }

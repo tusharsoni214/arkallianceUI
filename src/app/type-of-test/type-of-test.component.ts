@@ -3,6 +3,8 @@ import { TestCaseService } from '../services/test-case/test-case.service';
 import { LogService } from '../services/log/log.service';
 import { HotToastService } from '@ngneat/hot-toast';
 import OpenAI from "openai";
+import { MatDialog } from '@angular/material/dialog';
+import { AddTestComponent } from '../add-test/add-test.component';
 @Component({
   selector: 'app-type-of-test',
   templateUrl: './type-of-test.component.html',
@@ -10,11 +12,19 @@ import OpenAI from "openai";
 })
 export class TypeOfTestComponent implements OnInit{
   allLoading: boolean = false;
-  constructor(private testService: TestCaseService,private logService:LogService,private toast: HotToastService) { }
+  constructor(private testService: TestCaseService,private logService:LogService,private toast: HotToastService,public dialog: MatDialog) { }
   apiCases: any;
   openai:any
+  files:any;
+  reportLoading : boolean = false;
   ngOnInit(): void {
     this.testService.cleanReport().subscribe();
+    this.testService.getTestNames().subscribe(res=>{
+      console.log(res);
+      this.files = res;
+    },(error)=>{
+      this.toast.error("Compilation error, Api stopped working")
+    })
   }
 
     testTypes:string[] = ["UI", "Database", "Api", "Load"];
@@ -27,9 +37,11 @@ export class TypeOfTestComponent implements OnInit{
       this.panelExpanded[index] = expanded;
     }
     generateReport(){
+      this.reportLoading = true;
       this.testService.generateReport().subscribe(result=>{
         console.log(result);
         if(result){
+          this.reportLoading = false;
           this.toast.success("Report generated successfully")
         }else{
           this.toast.error("An error occured while generating the reports");
@@ -61,18 +73,22 @@ export class TypeOfTestComponent implements OnInit{
        this.logService.showLogs(testType,this.logs[i])
       });
     }
-  //  async runAllTestCases(){
-  //   try {
-  //     const stream = await this.openai.chat.completions.create({
-  //         model: "gpt-3.5-turbo",
-  //         messages: [{ role: "user", content: "Helloooo" }],
-  //     });
-  //     console.log(await stream);
-  // } catch (error) {
-  //     console.error("Error occurred:", error);
-  // }
+    addTestCase(i:number,testType:string,event:MouseEvent) {
+      event.stopPropagation();
+      const dialogRef = this.dialog.open(AddTestComponent,{
+        data:{
+          Files:this.files,
+          testType:testType
+        },
+        autoFocus:false,
+        minWidth:'50vw',
+        minHeight:'70vh'
+      })
+      dialogRef.afterClosed().subscribe(data=>{
 
-  //   }
+        window.location.reload();
+      })
+    }
     runAllTestCases(){
       this.allLoading = true;
       this.testService.runAllTests().subscribe((data:any)=>{

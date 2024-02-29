@@ -22,7 +22,6 @@ export class TestCaseDetailComponent implements OnInit{
     this.testService.getTestNames().subscribe((names:any) => {
       switch(this.testType.toUpperCase()){
         case'UI':{
-          console.log(names.ui) 
           names.ui = JSON.parse(names.ui);
           this.testFileNames = names.ui
           break;

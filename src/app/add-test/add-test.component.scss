@@ -1,20 +1,25 @@
-.chat-response{
+.mat-dialog-btns{
     display: flex;
-    flex-direction: column-reverse;
-    background-color: #141414da;
-    min-height: 65vh;
-    max-height: 65vh;
-    overflow: auto;
-    border-radius: 10px;
-    width: 100%;
-    color: white;
-    padding: 4vh;
+    justify-content: end;
+    gap: 0.5vw;
+}
+.container{
+    min-height: 70vh;
+    display: flex;
+    flex-direction: column;
+}
+.mat-tab-arkgpt{
+    display: flex;
+
+}
+.tab-group{
+    height: 100%;
 }
 .textarea-container{
-    margin: 4vh 0;
     border:1px solid rgba(0, 0, 0, 0.432);
     display: flex;
     align-items: center;
+    margin-top: 4vh;
     justify-content: space-between;
     border-radius: 20px;
     padding: 0 2vh;
@@ -32,6 +37,20 @@
     border: none;
     outline: none;
 }
+.dialog-sub-heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 2vh 0;
+}
+.heading{
+    display: flex;
+    justify-content: space-between;
+    margin: 2vh 1vw;
+}
+.mat-mdc-form-field-subscript-wrapper{
+    display: none;
+}
 .send-message-button{
     --mdc-icon-button-icon-color:white !important;
     margin: 0.5vh 0;
@@ -39,43 +58,10 @@
     background-color: rgb(146, 146, 146);
     background-color: #141414
 }
-.message{
-    position: relative;
-    margin-bottom: 5px;
-    .owner{
-        color: rgb(35 110 222);
-        font-weight: 500;
-    }
-    .content{
-        white-space: pre-wrap;
-        pre{
-            width: 60% !important;
-        }
-    }
-}
-// .you-message{
-//   background-color: aliceblue;
-//   border: 1px solid #42aaff;
-//   border-radius: 25px;
-//   padding: 10px;
-// }
-.myMessage{
-    display: flex;
-    justify-content: end;
-
-}
-// .arkgpt-message {
-//   background-color: pink;
-//   border: 1px solid #db4962;
-//   border-radius: 25px;
-//   padding: 10px;
-// }
-
-
 @keyframes spinner {
     to {transform: rotate(360deg);}
   }
-
+  
   .spinner:before {
     content: '';
     box-sizing: border-box;
